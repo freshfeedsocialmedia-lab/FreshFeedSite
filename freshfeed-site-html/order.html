@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start Your Order | FreshFeed</title>
+<meta name="description" content="Upload your logo and photos, pick your FreshFeed package, and check out securely with Stripe.">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:#222;background:#FFF6EA;line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:Nunito,system-ui,sans-serif;line-height:1.15}
+a{color:inherit}
+header{background:#fff;border-bottom:1px solid #ece7df}
+.nav{max-width:1120px;margin:0 auto;padding:0 20px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:32px}
+.wm{font-family:Nunito,sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em}
+.wm span{color:#E9952A}
+.nav a.back{font-size:15px;font-weight:500;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:48px 20px 72px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#C97A14}
+h1{font-size:clamp(34px,5vw,48px);font-weight:900;margin:10px 0 12px}
+.lead{color:#5d5d63;font-size:18px;margin-bottom:28px}
+.steps{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.steps span{background:#fff;border:1px solid #ece7df;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600}
+.steps b{color:#E9952A;margin-right:6px}
+form{background:#fff;border:1px solid #ece7df;border-radius:22px;padding:30px;box-shadow:0 14px 34px rgba(0,0,0,.05)}
+fieldset{border:0;margin-bottom:22px}
+legend{font-family:Nunito,sans-serif;font-weight:900;font-size:22px;margin-bottom:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:14px}
+.hint{font-weight:400;color:#5d5d63;font-size:13px}
+input,select,textarea{width:100%;margin-top:6px;padding:12px 14px;border:1px solid #d9d4cc;border-radius:12px;font:inherit;font-size:16px;background:#fff;color:#222}
+input[type=file]{padding:10px;background:#FFF6EA;border-style:dashed}
+input:focus,select:focus,textarea:focus{outline:2px solid #E9952A;border-color:#E9952A}
+textarea{min-height:110px;resize:vertical}
+.pkgs{display:grid;gap:10px}
+.pkg{display:flex;align-items:center;gap:12px;border:1px solid #d9d4cc;border-radius:14px;padding:14px 16px;cursor:pointer;margin:0;font-weight:500}
+.pkg input{width:auto;margin:0;accent-color:#E9952A}
+.pkg strong{font-weight:700}
+.pkg .price{margin-left:auto;font-family:Nunito,sans-serif;font-weight:900;white-space:nowrap}
+.pkg:has(input:checked){border:2px solid #E9952A;background:#FFF6EA}
+.hidden{display:none}
+.btn{display:block;width:100%;background:#E9952A;color:#fff;font-weight:600;padding:16px;border-radius:999px;border:0;font-size:17px;cursor:pointer;font-family:Inter,sans-serif}
+.btn:hover{background:#C97A14}
+.btn:disabled{opacity:.6;cursor:wait}
+.note{font-size:14px;color:#5d5d63;margin-top:12px;text-align:center}
+.err{color:#b3261e;font-size:14px;margin-top:10px;text-align:center}
+.contact{margin-top:26px;text-align:center;color:#5d5d63;font-size:15px}
+.contact a{color:#C97A14;font-weight:600}
+@media (max-width:640px){.row{grid-template-columns:1fr;gap:0}form{padding:22px}.pkg{flex-wrap:wrap}.pkg .price{margin-left:28px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="/"><img src="/icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+    <a class="back" href="/">← Back to site</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="eyebrow">Start your order</div>
+  <h1>Send us your stuff, then check out.</h1>
+  <p class="lead">Upload your logo and a few photos, tell us what you want to promote, and pick your package. You'll go straight to secure Stripe checkout to pay.</p>
+  <div class="steps"><span><b>1</b>Upload</span><span><b>2</b>Pay</span><span><b>3</b>Get your videos in 5–7 business days</span></div>
+
+  <form id="order" name="order" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+    <input type="hidden" name="form-name" value="order">
+    <input type="hidden" name="subject" value="New FreshFeed order">
+    <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+    <fieldset>
+      <legend>1. Pick your package</legend>
+      <div class="pkgs">
+        <label class="pkg"><input type="radio" name="package" value="Sample Video ($185)" data-key="sample" required> <span><strong>Sample Video</strong> · 1 video, one time</span><span class="price">$185</span></label>
+        <label class="pkg"><input type="radio" name="package" value="3-Video Pack ($250)" data-key="pack"> <span><strong>3-Video Pack</strong> · 3 videos, one time</span><span class="price">$250</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Starter Plan ($750/mo)" data-key="starter"> <span><strong>Starter</strong> · 12 videos a month</span><span class="price">$750/mo</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Growth Plan ($1,500/mo)" data-key="growth"> <span><strong>Growth</strong> · 20 videos + 8 graphics a month</span><span class="price">$1,500/mo</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Full Throttle Plan ($2,500/mo)" data-key="full"> <span><strong>Full Throttle</strong> · 30 videos a month + ad creative</span><span class="price">$2,500/mo</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. About you</legend>
+      <div class="row">
+        <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Business or brand name<input type="text" name="business" required></label>
+      </div>
+      <div class="row">
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+      </div>
+      <label>Website or social links <span class="hint">(optional)</span><input type="text" name="links" placeholder="instagram.com/yourbusiness"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Upload your files</legend>
+      <label>Logo <span class="hint">(PNG or JPG)</span><input type="file" name="logo" accept="image/*,.pdf,.svg"></label>
+      <div class="row">
+        <label>Photo 1<input type="file" name="photo1" accept="image/*"></label>
+        <label>Photo 2<input type="file" name="photo2" accept="image/*"></label>
+      </div>
+      <div class="row">
+        <label>Photo 3<input type="file" name="photo3" accept="image/*"></label>
+        <label>Photo 4<input type="file" name="photo4" accept="image/*"></label>
+      </div>
+      <label>More photos or videos? Paste a Google Drive, Dropbox or iCloud link <span class="hint">(optional)</span><input type="url" name="files_link" placeholder="https://"></label>
+      <p class="hint">Photos are shrunk automatically so they upload fast. Only send photos you own or have permission to use.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. What should we make?</legend>
+      <label>What do you want to promote? <span class="hint">(a service, a special, a listing, a product…)</span><textarea name="message" required></textarea></label>
+    </fieldset>
+
+    <button class="btn" type="submit" id="submitBtn">Continue to secure checkout →</button>
+    <p class="err hidden" id="err"></p>
+    <p class="note">Payments are processed by Stripe. You'll get a receipt by email.</p>
+  </form>
+
+  <p class="contact">Questions? Email <a href="mailto:freshfeed.socialmedia@gmail.com">freshfeed.socialmedia@gmail.com</a></p>
+</main>
+
+<script>
+(function(){
+  var LINKS={
+    sample:'https://buy.stripe.com/test_8x27sN3Lva570WE5KPgbm00',
+    pack:'https://buy.stripe.com/test_28E28t5TD4KN6gY6OTgbm01',
+    starter:'https://buy.stripe.com/test_28EfZj1Dncdf5cU4GLgbm02',
+    growth:'https://buy.stripe.com/test_4gM6oJ3Lv7WZ20Iehlgbm03',
+    full:'https://buy.stripe.com/test_28E3cx81L4KNeNu5KPgbm04'
+  };
+  var MAX=7.5*1024*1024;
+  var form=document.getElementById('order'), btn=document.getElementById('submitBtn'), err=document.getElementById('err');
+
+  // preselect package from ?package=
+  var want=new URLSearchParams(location.search).get('package');
+  if(want){var r=form.querySelector('input[data-key="'+want+'"]'); if(r) r.checked=true;}
+
+  function shrink(file){
+    return new Promise(function(resolve){
+      if(!file||!file.size||!/^image\/(jpeg|png|webp|heic|heif)/.test(file.type)||file.size<900*1024){resolve(file);return;}
+      var img=new Image(), url=URL.createObjectURL(file);
+      img.onload=function(){
+        var s=Math.min(1,1600/Math.max(img.width,img.height));
+        var c=document.createElement('canvas'); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s);
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+        c.toBlob(function(b){URL.revokeObjectURL(url); resolve(b?new File([b],file.name.replace(/\.\w+$/,'')+'.jpg',{type:'image/jpeg'}):file);},'image/jpeg',0.82);
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);resolve(file);};
+      img.src=url;
+    });
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    err.classList.add('hidden');
+    if(!form.reportValidity()) return;
+    var picked=form.querySelector('input[name=package]:checked');
+    var link=LINKS[picked.getAttribute('data-key')];
+    btn.disabled=true; btn.textContent='Uploading your files…';
+    var fd=new FormData(form);
+    var names=['photo1','photo2','photo3','photo4'];
+    Promise.all(names.map(function(n){return shrink(form.elements[n].files[0]);})).then(function(files){
+      names.forEach(function(n,i){ if(files[i]&&files[i].size) fd.set(n,files[i],files[i].name); });
+      var total=0; fd.forEach(function(v){ if(v instanceof File) total+=v.size; });
+      if(total>MAX) throw new Error('size');
+      return fetch('/',{method:'POST',body:fd});
+    }).then(function(res){
+      if(!res.ok) throw new Error('post');
+      btn.textContent='Taking you to checkout…';
+      var email=encodeURIComponent(form.elements.email.value.trim());
+      location.href=link+'?prefilled_email='+email;
+    }).catch(function(ex){
+      btn.disabled=false; btn.textContent='Continue to secure checkout →';
+      err.textContent= ex&&ex.message==='size'
+        ? 'Your files are too big to upload together (8 MB limit). Remove a photo or paste a Google Drive/Dropbox link instead.'
+        : 'Something went wrong uploading. Please try again, or email your files to freshfeed.socialmedia@gmail.com.';
+      err.classList.remove('hidden');
+    });
+  });
+})();
+</script>
+</body>
+</html>

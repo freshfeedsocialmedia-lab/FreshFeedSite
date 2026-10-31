@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreshFeed | Video Ads &amp; Social Content in Omaha</title>
+<meta name="description" content="FreshFeed is an Omaha content studio. We create ready-to-post video ads, reels, graphics and captions for trades, Airbnb hosts, real estate agents, athletes and creators. You post them. We make them.">
+<meta property="og:title" content="FreshFeed | Video Ads & Social Content">
+<meta property="og:description" content="Ready-to-post video ads and social content for busy businesses, athletes and creators.">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#E9952A; --orange-dark:#C97A14; --ink:#222222; --muted:#5d5d63;
+  --bg:#ffffff; --soft:#FFF6EA; --line:#ece7df; --dark:#161616;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:Nunito,system-ui,sans-serif;line-height:1.1;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;background:var(--orange);color:#fff;font-weight:600;text-decoration:none;padding:14px 26px;border-radius:999px;border:0;font-size:16px;cursor:pointer;font-family:Inter,sans-serif;transition:background .15s}
+.btn:hover{background:var(--orange-dark)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-dark)}
+
+/* nav */
+header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img.i{height:32px}
+.wm{font-family:Nunito,sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em;color:var(--ink)}.wm span{color:var(--orange)}
+.nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+.nav ul a{text-decoration:none;font-weight:500;font-size:15px}
+.nav ul a:hover{color:var(--orange-dark)}
+.nav .btn{padding:10px 18px;font-size:15px}
+@media (max-width:760px){.nav ul li.hide{display:none}.nav ul{gap:14px}}
+
+/* hero */
+.hero{padding:72px 0 80px;background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:900;margin:14px 0 20px}
+.hero h1 span{color:var(--orange)}
+.hero p.lead{font-size:20px;color:var(--muted);max-width:520px;margin-bottom:30px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .note{margin-top:18px;font-size:14px;color:var(--muted)}
+.phone{width:290px;max-width:100%;margin:0 auto;background:var(--dark);border-radius:38px;padding:12px;box-shadow:0 30px 60px rgba(34,34,34,.18)}
+.screen{background:#fff;border-radius:28px;overflow:hidden;height:540px;display:flex;flex-direction:column}
+.screen .bar{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px}
+.screen .bar img{height:22px}
+.post{padding:12px 14px}
+.post .who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;margin-bottom:8px}
+.post .av{width:26px;height:26px;border-radius:50%;background:var(--orange)}
+.post .av.b{background:#2c4a6b}.post .av.c{background:#4b8a5c}
+.media{border-radius:14px;height:150px;position:relative;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-family:Nunito,sans-serif;font-size:18px}
+.media.m1{background:linear-gradient(135deg,#f2b25c,#d9771b)}
+.media.m2{background:linear-gradient(135deg,#3a5d82,#1d3048)}
+.media.m3{background:linear-gradient(135deg,#6aa878,#2f6b40)}
+.media .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.9)}
+.media .play:after{content:"";position:absolute;left:17px;top:13px;border-left:14px solid var(--ink);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.stats{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px}
+@media (max-width:860px){.hero .grid{grid-template-columns:1fr}.phone{margin-top:10px}}
+
+section{padding:88px 0}
+.head{max-width:640px;margin-bottom:44px}
+.head h2{font-size:clamp(32px,4.4vw,46px);font-weight:900;margin:10px 0 12px}
+.head p{color:var(--muted);font-size:18px}
+
+/* who */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:20px;padding:26px;background:#fff}
+.card .ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.card .ic svg{width:24px;height:24px;stroke:var(--orange-dark);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:21px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px}
+@media (max-width:960px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+
+/* services */
+.services{background:var(--dark);color:#fff}
+.services .head p{color:#b9b9bf}
+.services .eyebrow{color:var(--orange)}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#2e2e2e;border-radius:20px;overflow:hidden}
+.svc div{background:var(--dark);padding:30px}
+.svc h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.svc h3:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--orange);margin-right:10px;vertical-align:middle}
+.svc p{color:#b9b9bf;font-size:15px}
+@media (max-width:860px){.svc{grid-template-columns:1fr}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;counter-reset:s}
+.step{position:relative;padding-top:58px}
+.step:before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:22px;font-weight:800;margin-bottom:8px}
+.step p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* pricing */
+.pricing{background:var(--soft)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;flex-direction:column}
+.plan.top{border:2px solid var(--orange);box-shadow:0 18px 40px rgba(233,149,42,.18);position:relative}
+.plan.top .tag{position:absolute;top:-13px;left:30px;background:var(--orange);color:#fff;font-size:12px;font-weight:600;padding:4px 12px;border-radius:999px;letter-spacing:.05em}
+.plan h3{font-size:22px;font-weight:800}
+.plan .price{font-family:Nunito,sans-serif;font-weight:900;font-size:44px;margin:10px 0 4px}
+.plan .price small{font-size:16px;font-weight:700;color:var(--muted)}
+.plan .for{color:var(--muted);font-size:15px;margin-bottom:18px}
+.plan ul{list-style:none;margin-bottom:24px;flex:1}
+.plan li{padding:7px 0 7px 26px;position:relative;font-size:15px;border-top:1px solid var(--line)}
+.plan li:before{content:"";position:absolute;left:2px;top:13px;width:12px;height:7px;border-left:2px solid var(--orange);border-bottom:2px solid var(--orange);transform:rotate(-45deg)}
+.plan .btn{text-align:center}
+.trial{margin-top:26px;background:#fff;border-radius:20px;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border:1px dashed var(--orange)}
+.trial h3{font-size:20px;font-weight:800}
+.trial p{color:var(--muted);font-size:15px}
+.fine{margin-top:16px;font-size:14px;color:var(--muted)}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
+
+/* contact */
+.contact .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px}
+.contact ul.points{list-style:none;margin-top:22px}
+.contact ul.points li{padding:8px 0;color:var(--muted)}
+.contact ul.points b{color:var(--ink)}
+form{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 14px 34px rgba(0,0,0,.05)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:14px}
+input,select,textarea{width:100%;margin-top:6px;padding:12px 14px;border:1px solid #d9d4cc;border-radius:12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--orange);border-color:var(--orange)}
+textarea{min-height:110px;resize:vertical}
+.hidden{display:none}
+form .btn{width:100%}
+@media (max-width:860px){.contact .grid{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:0}}
+
+footer{background:var(--dark);color:#b9b9bf;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer b{color:#fff;font-family:Nunito,sans-serif;font-size:20px}
+footer b span{color:var(--orange)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="FreshFeed home"><img class="i" src="/icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+    <ul>
+      <li class="hide"><a href="#who">Who we help</a></li>
+      <li class="hide"><a href="#services">Services</a></li>
+      <li class="hide"><a href="#pricing">Pricing</a></li>
+      <li><a class="btn" href="/order">Order now</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow">Video ads &amp; social content · Omaha, NE</div>
+      <h1>Keep your feed <span>fresh.</span><br>We make the content.</h1>
+      <p class="lead">Scroll-stopping video ads, reels and graphics, made for your business and delivered ready to post. You keep control of your pages and your ad budget.</p>
+      <div class="ctas">
+        <a class="btn" href="/order?package=sample">Get a sample video: $185</a>
+        <a class="btn ghost" href="#pricing">See plans</a>
+      </div>
+      <p class="note">No film crew. <a href="/order" style="color:inherit;font-weight:600">Upload your logo and phone photos</a>, pay online, and we send back finished content.</p>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <div class="bar"><img src="/icon.svg" alt="">Your feed</div>
+        <div class="post">
+          <div class="who"><span class="av"></span>Your Roofing Co.</div>
+          <div class="media m1"><span class="play"></span>Before → After in 60s</div>
+          <div class="stats"><span>♥ likes</span><span>💬 comments</span><span>↗ shares</span></div>
+        </div>
+        <div class="post">
+          <div class="who"><span class="av b"></span>Your Lake House Stay</div>
+          <div class="media m2"><span class="play"></span>Walk through the cabin</div>
+        </div>
+        <div class="post">
+          <div class="who"><span class="av c"></span>Your Lawn Care</div>
+          <div class="media m3"><span class="play"></span>Spring cleanup special</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Who we help</div>
+      <h2>Built for busy people who need better content.</h2>
+      <p>You know what to post. You just don't have time to make it. That's our job.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg></div>
+        <h3>Trades &amp; home services</h3>
+        <p>Roofing, HVAC, plumbing, electrical, landscaping, concrete and auto detailing. Job-site videos and before-and-after reels that bring in calls.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10"/><circle cx="12" cy="14" r="2"/></svg></div>
+        <h3>Airbnb hosts &amp; real estate</h3>
+        <p>Walkthrough reels from your listing photos, just-listed and just-sold videos, local guides and open house ads.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3.5 3 3.5 9.8 0 12.8M18.4 5.6c-3.5 3-3.5 9.8 0 12.8"/></svg></div>
+        <h3>Athletes &amp; NIL</h3>
+        <p>Highlight edits, game-day graphics and polished content that grows your following and gets you ready for brand deals.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h3>Creators &amp; influencers</h3>
+        <p>More polished content without burning out. Short videos, graphics and captions, delivered every week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">What we do</div>
+      <h2>Content and ad creative, made for you.</h2>
+      <p>Made fast with the latest AI video tools and checked by a real person before it gets to you. You post it and run it however you like.</p>
+    </div>
+    <div class="svc">
+      <div><h3>Short videos &amp; reels</h3><p>Scroll-stopping clips for Instagram, TikTok, Facebook and YouTube Shorts, made from your real photos.</p></div>
+      <div><h3>Captions &amp; hashtags</h3><p>Hooks, captions and hashtags written for every post, in a voice that sounds like you.</p></div>
+      <div><h3>Video ads</h3><p>Ad-ready videos sized for Facebook, Instagram and TikTok, with strong hooks and clear calls to action.</p></div>
+      <div><h3>Ad variations</h3><p>Multiple versions of each ad (different hooks, text and cuts) so you can test what works best.</p></div>
+      <div><h3>Graphics &amp; promos</h3><p>Branded images for offers, announcements, Google Business posts and stories.</p></div>
+      <div><h3>Monthly content plan</h3><p>A simple plan for what to post and when, so you're never stuck wondering what's next.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">How it works</div>
+      <h2>Three steps. Zero filming.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Upload &amp; pay</h3><p>Pick a package on our <a href="/order" style="color:var(--orange-dark);font-weight:600">order page</a>, upload your logo and a few phone photos, and check out securely with Stripe.</p></div>
+      <div class="step"><h3>We create, you approve</h3><p>We plan, script and build your videos and graphics. You get one easy round of changes.</p></div>
+      <div class="step"><h3>You get it, ready to post</h3><p>Finished files land in a shared folder, with captions, sized for every platform. You post them or run them as ads.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Simple monthly plans.</h2>
+      <p>Pick the plan that fits. You own everything we make.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">$750<small>/mo</small></div>
+        <p class="for">For getting consistent online.</p>
+        <ul>
+          <li>12 short videos a month</li>
+          <li>Sized for 2 platforms</li>
+          <li>Captions &amp; hashtags</li>
+          <li>Monthly content plan</li>
+        </ul>
+        <a class="btn ghost" href="/order?package=starter">Choose Starter</a>
+      </div>
+      <div class="plan top">
+        <span class="tag">MOST POPULAR</span>
+        <h3>Growth</h3>
+        <div class="price">$1,500<small>/mo</small></div>
+        <p class="for">For businesses ready to grow.</p>
+        <ul>
+          <li>20 videos + 8 graphics a month</li>
+          <li>Sized for every platform</li>
+          <li>Branded spokesperson videos</li>
+          <li>Ad-ready versions of your best videos</li>
+          <li>Monthly content plan</li>
+        </ul>
+        <a class="btn" href="/order?package=growth">Choose Growth</a>
+      </div>
+      <div class="plan">
+        <h3>Full Throttle</h3>
+        <div class="price">$2,500<small>/mo</small></div>
+        <p class="for">For brands running lots of ads.</p>
+        <ul>
+          <li>30 videos a month</li>
+          <li>Ad creative for Facebook, Instagram &amp; TikTok</li>
+          <li>5 new ad versions every week</li>
+          <li>Recruiting / hiring videos</li>
+          <li>Check-in call every 2 weeks</li>
+        </ul>
+        <a class="btn ghost" href="/order?package=full">Choose Full Throttle</a>
+      </div>
+    </div>
+    <div class="trial">
+      <div>
+        <h3>Not ready for monthly? Try a sample pack.</h3>
+        <p>Get 3 ready-to-post videos made for your business, one time, for $250.</p>
+      </div>
+      <a class="btn" href="/order?package=pack">Get the 3-video pack</a>
+    </div>
+    <p class="fine">Airbnb host plans start at $500/mo. Athlete and creator plans are priced to fit. Ask us.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow">Get started</div>
+      <div class="head" style="margin-bottom:0">
+        <h2>Questions first? Let's talk.</h2>
+        <p>Tell us about your business or brand and what you want to promote. Ready now? <a href="/order?package=sample" style="color:var(--orange-dark);font-weight:600">Order a $185 sample video</a>.</p>
+      </div>
+      <ul class="points">
+        <li><b>Based in Omaha.</b> Serving Council Bluffs, Lincoln and clients nationwide.</li>
+        <li><b>Fast replies.</b> We'll get back to you within one business day.</li>
+        <li><b>Email us:</b> <a href="mailto:freshfeed.socialmedia@gmail.com" style="color:var(--orange-dark);font-weight:600">freshfeed.socialmedia@gmail.com</a></li>
+        <li><b>Ready to order?</b> <a href="/order" style="color:var(--orange-dark);font-weight:600">Upload your files and check out →</a></li>
+        <li><b>No commitment.</b> Pay once, keep the video. No monthly contract needed.</li>
+      </ul>
+    </div>
+    <form name="contact" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="subject" value="New FreshFeed lead">
+      <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="row">
+        <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Business or brand name<input type="text" name="business" required></label>
+      </div>
+      <div class="row">
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+      </div>
+      <label>What best describes you?
+        <select name="type" required>
+          <option value="">Choose one</option>
+          <option>Trades / home services</option>
+          <option>Airbnb host / short-term rental</option>
+          <option>Real estate</option>
+          <option>Athlete / NIL</option>
+          <option>Creator / influencer</option>
+          <option>Other business</option>
+        </select>
+      </label>
+      <label>What are you interested in?
+        <select name="interest">
+          <option>Sample video ($185)</option>
+          <option>3-video pack ($250)</option>
+          <option>Monthly plan</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <label>Anything else? (your website or socials, what you want to promote)<textarea name="message"></textarea></label>
+      <button class="btn" type="submit">Send it</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>fresh<span>feed</span></b>
+    <span>Video ads &amp; social content · Omaha, Nebraska · <a href="mailto:freshfeed.socialmedia@gmail.com" style="color:#fff">freshfeed.socialmedia@gmail.com</a></span>
+    <span>© 2026 FreshFeed</span>
+  </div>
+</footer>
+</body>
+</html>
