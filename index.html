@@ -52,6 +52,10 @@ header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:bl
 .screen{background:#fff;border-radius:28px;overflow:hidden;height:540px;display:flex;flex-direction:column}
 .screen .bar{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px}
 .screen .bar img{height:22px}
+.phone video{display:none;width:100%;height:540px;object-fit:cover;border-radius:28px;background:#000}
+.phone.has-video video{display:block}.phone.has-video .screen{display:none}
+.sound{display:none;margin:12px auto 0;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font:600 14px Inter,sans-serif;cursor:pointer}
+.phone.has-video + .sound{display:block}
 .post{padding:12px 14px}
 .post .who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;margin-bottom:8px}
 .post .av{width:26px;height:26px;border-radius:50%;background:var(--orange)}
@@ -167,8 +171,10 @@ footer b span{color:var(--orange)}
       </div>
       <p class="note">No film crew. <a href="order.html" style="color:inherit;font-weight:600">Upload your logo and phone photos</a>, pay online, and we send back finished content.</p>
     </div>
-    <div class="phone" aria-hidden="true">
-      <div class="screen">
+    <div>
+    <div class="phone" id="promoPhone">
+      <video id="promo" src="promo.mp4" poster="promo-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="FreshFeed promo video"></video>
+      <div class="screen" aria-hidden="true">
         <div class="bar"><img src="icon.svg" alt="">Your feed</div>
         <div class="post">
           <div class="who"><span class="av"></span>Your Roofing Co.</div>
@@ -184,6 +190,8 @@ footer b span{color:var(--orange)}
           <div class="media m3"><span class="play"></span>Spring cleanup special</div>
         </div>
       </div>
+    </div>
+    <button class="sound" id="soundBtn" type="button">🔊 Tap for sound</button>
     </div>
   </div>
 </section>
@@ -389,5 +397,10 @@ footer b span{color:var(--orange)}
     <span>© 2026 FreshFeed</span>
   </div>
 </footer>
+<script>
+(function(){var v=document.getElementById('promo'),ph=document.getElementById('promoPhone'),b=document.getElementById('soundBtn');
+v.addEventListener('loadeddata',function(){ph.classList.add('has-video');var p=v.play();if(p)p.catch(function(){});});
+b.addEventListener('click',function(){v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play();}b.textContent=v.muted?'🔊 Tap for sound':'🔇 Mute';});})();
+</script>
 </body>
 </html>
