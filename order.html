@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Start Your Order | FreshFeed</title>
 <meta name="description" content="Upload your logo and photos, pick your FreshFeed package, and check out securely with Stripe.">
-<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -58,8 +58,8 @@ textarea{min-height:110px;resize:vertical}
 <body>
 <header>
   <div class="nav">
-    <a class="brand" href="/"><img src="/icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
-    <a class="back" href="/">← Back to site</a>
+    <a class="brand" href="index.html"><img src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+    <a class="back" href="index.html">← Back to site</a>
   </div>
 </header>
 
@@ -69,16 +69,19 @@ textarea{min-height:110px;resize:vertical}
   <p class="lead">Upload your logo and a few photos, tell us what you want to promote, and pick your package. You'll go straight to secure Stripe checkout to pay.</p>
   <div class="steps"><span><b>1</b>Upload</span><span><b>2</b>Pay</span><span><b>3</b>Get your videos in 5–7 business days</span></div>
 
-  <form id="order" name="order" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
-    <input type="hidden" name="form-name" value="order">
-    <input type="hidden" name="subject" value="New FreshFeed order">
-    <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+  <form id="order" method="POST" action="https://formsubmit.co/freshfeed.socialmedia@gmail.com" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="New FreshFeed order">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="">
+    <p class="hidden"><label>Don't fill this out: <input name="_honey"></label></p>
 
     <fieldset>
       <legend>1. Pick your package</legend>
       <div class="pkgs">
         <label class="pkg"><input type="radio" name="package" value="Sample Video ($185)" data-key="sample" required> <span><strong>Sample Video</strong> · 1 video, one time</span><span class="price">$185</span></label>
         <label class="pkg"><input type="radio" name="package" value="3-Video Pack ($250)" data-key="pack"> <span><strong>3-Video Pack</strong> · 3 videos, one time</span><span class="price">$250</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Product Ad Pack ($300)" data-key="product"> <span><strong>Product Ad Pack</strong> · 3 product videos + 5 images, one time</span><span class="price">$300</span></label>
         <label class="pkg"><input type="radio" name="package" value="Starter Plan ($750/mo)" data-key="starter"> <span><strong>Starter</strong> · 12 videos a month</span><span class="price">$750/mo</span></label>
         <label class="pkg"><input type="radio" name="package" value="Growth Plan ($1,500/mo)" data-key="growth"> <span><strong>Growth</strong> · 20 videos + 8 graphics a month</span><span class="price">$1,500/mo</span></label>
         <label class="pkg"><input type="radio" name="package" value="Full Throttle Plan ($2,500/mo)" data-key="full"> <span><strong>Full Throttle</strong> · 30 videos a month + ad creative</span><span class="price">$2,500/mo</span></label>
@@ -102,7 +105,7 @@ textarea{min-height:110px;resize:vertical}
       <legend>3. Upload your files</legend>
       <label>Logo <span class="hint">(PNG or JPG)</span><input type="file" name="logo" accept="image/*,.pdf,.svg"></label>
       <div class="row">
-        <label>Photo 1<input type="file" name="photo1" accept="image/*"></label>
+        <label>Photo 1 <span class="hint">(products: a clear shot on a plain background works best)</span><input type="file" name="photo1" accept="image/*"></label>
         <label>Photo 2<input type="file" name="photo2" accept="image/*"></label>
       </div>
       <div class="row">
@@ -133,9 +136,10 @@ textarea{min-height:110px;resize:vertical}
     pack:'https://buy.stripe.com/test_28E28t5TD4KN6gY6OTgbm01',
     starter:'https://buy.stripe.com/test_28EfZj1Dncdf5cU4GLgbm02',
     growth:'https://buy.stripe.com/test_4gM6oJ3Lv7WZ20Iehlgbm03',
-    full:'https://buy.stripe.com/test_28E3cx81L4KNeNu5KPgbm04'
+    full:'https://buy.stripe.com/test_28E3cx81L4KNeNu5KPgbm04',
+    product:'' // add the $300 Product Ad Pack Stripe link here
   };
-  var MAX=7.5*1024*1024;
+  var MAX=9*1024*1024;
   var form=document.getElementById('order'), btn=document.getElementById('submitBtn'), err=document.getElementById('err');
 
   // preselect package from ?package=
@@ -158,29 +162,32 @@ textarea{min-height:110px;resize:vertical}
   }
 
   form.addEventListener('submit',function(e){
+    if(form.dataset.ready==='1') return;
     e.preventDefault();
     err.classList.add('hidden');
     if(!form.reportValidity()) return;
     var picked=form.querySelector('input[name=package]:checked');
     var link=LINKS[picked.getAttribute('data-key')];
+    var email=encodeURIComponent(form.elements.email.value.trim());
+    form.elements._next.value = link ? (link+'?prefilled_email='+email) : new URL('thank-you.html',location.href).href;
     btn.disabled=true; btn.textContent='Uploading your files…';
-    var fd=new FormData(form);
     var names=['photo1','photo2','photo3','photo4'];
     Promise.all(names.map(function(n){return shrink(form.elements[n].files[0]);})).then(function(files){
-      names.forEach(function(n,i){ if(files[i]&&files[i].size) fd.set(n,files[i],files[i].name); });
-      var total=0; fd.forEach(function(v){ if(v instanceof File) total+=v.size; });
+      var total=0;
+      names.forEach(function(n,i){
+        var f=files[i];
+        if(f&&f.size){ var dt=new DataTransfer(); dt.items.add(f); form.elements[n].files=dt.files; total+=f.size; }
+      });
+      var lg=form.elements.logo.files[0]; if(lg) total+=lg.size;
       if(total>MAX) throw new Error('size');
-      return fetch('/',{method:'POST',body:fd});
-    }).then(function(res){
-      if(!res.ok) throw new Error('post');
-      btn.textContent='Taking you to checkout…';
-      var email=encodeURIComponent(form.elements.email.value.trim());
-      location.href=link+'?prefilled_email='+email;
+      form.dataset.ready='1';
+      btn.textContent= link ? 'Taking you to checkout…' : 'Sending your order…';
+      form.submit();
     }).catch(function(ex){
       btn.disabled=false; btn.textContent='Continue to secure checkout →';
       err.textContent= ex&&ex.message==='size'
-        ? 'Your files are too big to upload together (8 MB limit). Remove a photo or paste a Google Drive/Dropbox link instead.'
-        : 'Something went wrong uploading. Please try again, or email your files to freshfeed.socialmedia@gmail.com.';
+        ? 'Your files are too big to send together. Remove a photo or paste a Google Drive/Dropbox link instead.'
+        : 'Something went wrong. Please try again, or email your files to freshfeed.socialmedia@gmail.com.';
       err.classList.remove('hidden');
     });
   });

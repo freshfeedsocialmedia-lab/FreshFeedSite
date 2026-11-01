@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FreshFeed | Video Ads &amp; Social Content in Omaha</title>
-<meta name="description" content="FreshFeed is an Omaha content studio. We create ready-to-post video ads, reels, graphics and captions for trades, Airbnb hosts, real estate agents, athletes and creators. You post them. We make them.">
+<meta name="description" content="FreshFeed is an Omaha content studio. We create ready-to-post video ads, reels, graphics and captions for trades, Airbnb hosts, real estate agents, athletes, creators and product brands. You post them. We make them.">
 <meta property="og:title" content="FreshFeed | Video Ads & Social Content">
 <meta property="og:description" content="Ready-to-post video ads and social content for busy businesses, athletes and creators.">
-<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@ section{padding:88px 0}
 .head p{color:var(--muted);font-size:18px}
 
 /* who */
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
 .card{border:1px solid var(--line);border-radius:20px;padding:26px;background:#fff}
 .card .ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
 .card .ic svg{width:24px;height:24px;stroke:var(--orange-dark);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -144,12 +144,12 @@ footer b span{color:var(--orange)}
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="FreshFeed home"><img class="i" src="/icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+    <a class="brand" href="#top" aria-label="FreshFeed home"><img class="i" src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
     <ul>
       <li class="hide"><a href="#who">Who we help</a></li>
       <li class="hide"><a href="#services">Services</a></li>
       <li class="hide"><a href="#pricing">Pricing</a></li>
-      <li><a class="btn" href="/order">Order now</a></li>
+      <li><a class="btn" href="order.html">Order now</a></li>
     </ul>
   </div>
 </header>
@@ -162,14 +162,14 @@ footer b span{color:var(--orange)}
       <h1>Keep your feed <span>fresh.</span><br>We make the content.</h1>
       <p class="lead">Scroll-stopping video ads, reels and graphics, made for your business and delivered ready to post. You keep control of your pages and your ad budget.</p>
       <div class="ctas">
-        <a class="btn" href="/order?package=sample">Get a sample video: $185</a>
+        <a class="btn" href="order.html?package=sample">Get a sample video: $185</a>
         <a class="btn ghost" href="#pricing">See plans</a>
       </div>
-      <p class="note">No film crew. <a href="/order" style="color:inherit;font-weight:600">Upload your logo and phone photos</a>, pay online, and we send back finished content.</p>
+      <p class="note">No film crew. <a href="order.html" style="color:inherit;font-weight:600">Upload your logo and phone photos</a>, pay online, and we send back finished content.</p>
     </div>
     <div class="phone" aria-hidden="true">
       <div class="screen">
-        <div class="bar"><img src="/icon.svg" alt="">Your feed</div>
+        <div class="bar"><img src="icon.svg" alt="">Your feed</div>
         <div class="post">
           <div class="who"><span class="av"></span>Your Roofing Co.</div>
           <div class="media m1"><span class="play"></span>Before → After in 60s</div>
@@ -216,6 +216,11 @@ footer b span{color:var(--orange)}
         <h3>Creators &amp; influencers</h3>
         <p>More polished content without burning out. Short videos, graphics and captions, delivered every week.</p>
       </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h10l-1 5H8z"/><path d="M8 8l-1 13h10L16 8"/><path d="M9 13h6"/></svg></div>
+        <h3>Food, drinks &amp; product brands</h3>
+        <p>Snack and beverage companies, vending operators, local food makers and online shops. Product hero shots, pour and splash videos and UGC-style ads.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -245,7 +250,7 @@ footer b span{color:var(--orange)}
       <h2>Three steps. Zero filming.</h2>
     </div>
     <div class="steps">
-      <div class="step"><h3>Upload &amp; pay</h3><p>Pick a package on our <a href="/order" style="color:var(--orange-dark);font-weight:600">order page</a>, upload your logo and a few phone photos, and check out securely with Stripe.</p></div>
+      <div class="step"><h3>Upload &amp; pay</h3><p>Pick a package on our <a href="order.html" style="color:var(--orange-dark);font-weight:600">order page</a>, upload your logo and a few phone photos, and check out securely with Stripe.</p></div>
       <div class="step"><h3>We create, you approve</h3><p>We plan, script and build your videos and graphics. You get one easy round of changes.</p></div>
       <div class="step"><h3>You get it, ready to post</h3><p>Finished files land in a shared folder, with captions, sized for every platform. You post them or run them as ads.</p></div>
     </div>
@@ -270,7 +275,7 @@ footer b span{color:var(--orange)}
           <li>Captions &amp; hashtags</li>
           <li>Monthly content plan</li>
         </ul>
-        <a class="btn ghost" href="/order?package=starter">Choose Starter</a>
+        <a class="btn ghost" href="order.html?package=starter">Choose Starter</a>
       </div>
       <div class="plan top">
         <span class="tag">MOST POPULAR</span>
@@ -284,7 +289,7 @@ footer b span{color:var(--orange)}
           <li>Ad-ready versions of your best videos</li>
           <li>Monthly content plan</li>
         </ul>
-        <a class="btn" href="/order?package=growth">Choose Growth</a>
+        <a class="btn" href="order.html?package=growth">Choose Growth</a>
       </div>
       <div class="plan">
         <h3>Full Throttle</h3>
@@ -297,7 +302,7 @@ footer b span{color:var(--orange)}
           <li>Recruiting / hiring videos</li>
           <li>Check-in call every 2 weeks</li>
         </ul>
-        <a class="btn ghost" href="/order?package=full">Choose Full Throttle</a>
+        <a class="btn ghost" href="order.html?package=full">Choose Full Throttle</a>
       </div>
     </div>
     <div class="trial">
@@ -305,9 +310,16 @@ footer b span{color:var(--orange)}
         <h3>Not ready for monthly? Try a sample pack.</h3>
         <p>Get 3 ready-to-post videos made for your business, one time, for $250.</p>
       </div>
-      <a class="btn" href="/order?package=pack">Get the 3-video pack</a>
+      <a class="btn" href="order.html?package=pack">Get the 3-video pack</a>
     </div>
-    <p class="fine">Airbnb host plans start at $500/mo. Athlete and creator plans are priced to fit. Ask us.</p>
+    <div class="trial">
+      <div>
+        <h3>Sell a product? Get the Product Ad Pack.</h3>
+        <p>3 product videos + 5 product images (hero shots, pour and splash, unboxing, UGC-style ads), one time, for $300.</p>
+      </div>
+      <a class="btn" href="order.html?package=product">Get the Product Ad Pack</a>
+    </div>
+    <p class="fine">Monthly plans cover ongoing product content too. Airbnb host plans start at $500/mo. Athlete and creator plans are priced to fit. Ask us.</p>
   </div>
 </section>
 
@@ -317,19 +329,22 @@ footer b span{color:var(--orange)}
       <div class="eyebrow">Get started</div>
       <div class="head" style="margin-bottom:0">
         <h2>Questions first? Let's talk.</h2>
-        <p>Tell us about your business or brand and what you want to promote. Ready now? <a href="/order?package=sample" style="color:var(--orange-dark);font-weight:600">Order a $185 sample video</a>.</p>
+        <p>Tell us about your business or brand and what you want to promote. Ready now? <a href="order.html?package=sample" style="color:var(--orange-dark);font-weight:600">Order a $185 sample video</a>.</p>
       </div>
       <ul class="points">
         <li><b>Based in Omaha.</b> Serving Council Bluffs, Lincoln and clients nationwide.</li>
         <li><b>Fast replies.</b> We'll get back to you within one business day.</li>
         <li><b>Email us:</b> <a href="mailto:freshfeed.socialmedia@gmail.com" style="color:var(--orange-dark);font-weight:600">freshfeed.socialmedia@gmail.com</a></li>
-        <li><b>Ready to order?</b> <a href="/order" style="color:var(--orange-dark);font-weight:600">Upload your files and check out →</a></li>
+        <li><b>Ready to order?</b> <a href="order.html" style="color:var(--orange-dark);font-weight:600">Upload your files and check out →</a></li>
         <li><b>No commitment.</b> Pay once, keep the video. No monthly contract needed.</li>
       </ul>
     </div>
-    <form name="contact" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="subject" value="New FreshFeed lead">
-      <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <form id="contactForm" method="POST" action="https://formsubmit.co/freshfeed.socialmedia@gmail.com">
+      <input type="hidden" name="_subject" value="New FreshFeed lead">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="">
+      <p class="hidden"><label>Don't fill this out: <input name="_honey"></label></p>
       <div class="row">
         <label>Your name<input type="text" name="name" required autocomplete="name"></label>
         <label>Business or brand name<input type="text" name="business" required></label>
@@ -346,6 +361,7 @@ footer b span{color:var(--orange)}
           <option>Real estate</option>
           <option>Athlete / NIL</option>
           <option>Creator / influencer</option>
+          <option>Food, drink or product brand</option>
           <option>Other business</option>
         </select>
       </label>
@@ -353,6 +369,7 @@ footer b span{color:var(--orange)}
         <select name="interest">
           <option>Sample video ($185)</option>
           <option>3-video pack ($250)</option>
+          <option>Product Ad Pack ($300)</option>
           <option>Monthly plan</option>
           <option>Not sure yet</option>
         </select>
@@ -363,6 +380,7 @@ footer b span{color:var(--orange)}
   </div>
 </section>
 </main>
+<script>var cf=document.getElementById("contactForm");if(cf){cf.elements._next.value=new URL("thank-you.html",location.href).href;}</script>
 
 <footer>
   <div class="wrap">
