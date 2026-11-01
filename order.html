@@ -98,11 +98,27 @@ textarea{min-height:110px;resize:vertical}
         <label>Email<input type="email" name="email" required autocomplete="email"></label>
         <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
       </div>
-      <label>Website or social links <span class="hint">(optional)</span><input type="text" name="links" placeholder="instagram.com/yourbusiness"></label>
     </fieldset>
 
     <fieldset>
-      <legend>3. Upload your files</legend>
+      <legend>3. Your social media pages</legend>
+      <p class="hint" style="margin:-6px 0 14px">Add whichever pages you have so we can match your style. All optional.</p>
+      <div class="row">
+        <label>Website<input type="text" name="website" placeholder="yourbusiness.com"></label>
+        <label>Instagram<input type="text" name="instagram" placeholder="@yourbusiness"></label>
+      </div>
+      <div class="row">
+        <label>TikTok<input type="text" name="tiktok" placeholder="@yourbusiness"></label>
+        <label>Facebook<input type="text" name="facebook" placeholder="facebook.com/yourbusiness"></label>
+      </div>
+      <div class="row">
+        <label>YouTube<input type="text" name="youtube" placeholder="youtube.com/@yourbusiness"></label>
+        <label>Other (LinkedIn, X, Google, Airbnb…)<input type="text" name="other_links" placeholder="Paste any other links"></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. Upload your files</legend>
       <label>Logo <span class="hint">(PNG, JPG, SVG, AI, EPS or PDF)</span><input type="file" name="logo" accept="image/*,.svg,.ai,.eps,.pdf,image/svg+xml,application/postscript,application/illustrator,application/pdf"></label>
       <div class="row">
         <label>Photo 1 <span class="hint">(products: a clear shot on a plain background works best)</span><input type="file" name="photo1" accept="image/*,.svg,.ai,.eps,.pdf,image/svg+xml,application/postscript,application/illustrator,application/pdf"></label>
@@ -117,7 +133,7 @@ textarea{min-height:110px;resize:vertical}
     </fieldset>
 
     <fieldset>
-      <legend>4. What should we make?</legend>
+      <legend>5. What should we make?</legend>
       <label>What do you want to promote? <span class="hint">(a service, a special, a listing, a product…)</span><textarea name="message" required></textarea></label>
     </fieldset>
 
