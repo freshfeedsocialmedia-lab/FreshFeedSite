@@ -75,7 +75,7 @@ section{padding:88px 0}
 .head p{color:var(--muted);font-size:18px}
 
 /* who */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{border:1px solid var(--line);border-radius:20px;padding:26px;background:#fff}
 .card .ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
 .card .ic svg{width:24px;height:24px;stroke:var(--orange-dark);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -235,6 +235,11 @@ footer b span{color:var(--orange)}
         <h3>Food, drinks &amp; product brands</h3>
         <p>Snack and beverage companies, vending operators, local food makers and online shops. Product hero shots, pour and splash videos and UGC-style ads.</p>
       </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h14l-7 8z"/><path d="M12 12v7M8 20h8"/></svg></div>
+        <h3>Bars, nightlife &amp; restaurants</h3>
+        <p>Drink specials, trivia and game-day promos, live music and DJ nights, new menu items and event recaps. Fresh content every week that fills seats.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -386,6 +391,7 @@ footer b span{color:var(--orange)}
           <option>Athlete / NIL</option>
           <option>Creator / influencer</option>
           <option>Food, drink or product brand</option>
+          <option>Bar, nightlife or restaurant</option>
           <option>Other business</option>
         </select>
       </label>
