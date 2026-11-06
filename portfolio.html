@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio | FreshFeed</title>
+<meta name="description" content="FreshFeed portfolio: AI video ads and social content made with Higgsfield for apparel brands, vending operators and more.">
+<meta property="og:title" content="FreshFeed Portfolio">
+<meta property="og:description" content="Scroll-stopping AI video ads, made with Higgsfield.">
+<meta property="og:image" content="portfolio/occultist-floating-fall-poster.jpg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E9952A;--orange-dark:#C97A14;--ink:#222;--muted:#5d5d63;--bg:#fff;--soft:#FFF6EA;--line:#ece7df;--dark:#161616}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:Nunito,system-ui,sans-serif;line-height:1.1;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;background:var(--orange);color:#fff;font-weight:600;text-decoration:none;padding:14px 26px;border-radius:999px;border:0;font-size:16px;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--orange-dark)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-dark)}
+header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:32px}
+.wm{font-family:Nunito,sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em}.wm span{color:var(--orange)}
+.nav ul{display:flex;gap:22px;list-style:none;align-items:center}
+.nav ul a{text-decoration:none;font-weight:500;font-size:15px}
+.nav ul a.tab{font-weight:700;color:var(--orange-dark);border:2px solid var(--orange);padding:7px 16px;border-radius:999px}
+.nav ul a.tab.on{background:var(--orange);color:#fff}
+.nav .btn{padding:10px 18px;font-size:15px}
+@media (max-width:760px){.nav ul li.hide{display:none}.nav ul a{white-space:nowrap}.nav ul a.tab{padding:6px 12px;font-size:14px}.nav .btn{padding:8px 14px;font-size:14px}.brand img,.brand img.i{height:26px}.brand{gap:7px}.nav ul{gap:10px}.wm{font-size:23px}}
+
+.top{padding:64px 0 36px;background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.top h1{font-size:clamp(38px,6vw,62px);font-weight:900;margin:12px 0 14px}
+.top h1 span{color:var(--orange)}
+.top p{color:var(--muted);font-size:19px;max-width:600px}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600}
+.badge:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 28px}
+.filters button{font:600 15px Inter,sans-serif;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--dark);color:#fff;border-color:var(--dark)}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding-bottom:80px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+.item video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:#000;display:block;box-shadow:0 14px 34px rgba(34,34,34,.14)}
+.item h3{font-size:18px;font-weight:800;margin:12px 0 2px}
+.item .client{font-size:14px;color:var(--muted)}
+.item .tag{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--orange-dark);background:var(--soft);border-radius:999px;padding:2px 10px}
+.item[hidden]{display:none}
+
+.cta{background:var(--dark);color:#fff;padding:64px 0;text-align:center}
+.cta h2{font-size:clamp(30px,4vw,42px);font-weight:900;margin-bottom:10px}
+.cta p{color:#b9b9bf;margin-bottom:24px}
+footer{background:var(--dark);color:#b9b9bf;padding:0 0 40px;font-size:14px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="FreshFeed home"><img src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+    <ul>
+      <li><a class="tab on" href="portfolio.html" aria-current="page">Portfolio</a></li>
+      <li class="hide"><a href="index.html#services">Services</a></li>
+      <li class="hide"><a href="index.html#pricing">Pricing</a></li>
+      <li><a class="btn" href="order.html">Order now</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="top">
+  <div class="wrap">
+    <div class="eyebrow">Portfolio</div>
+    <h1>Our <span>work.</span></h1>
+    <p>Short-form video ads and social content made for brands and businesses. Tap any video to play it with sound.</p>
+    <div class="badge">All videos created with Higgsfield AI</div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="filters" role="group" aria-label="Filter videos">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="apparel" aria-pressed="false">Apparel</button>
+    <button type="button" data-f="product" aria-pressed="false">Product &amp; vending</button>
+    <button type="button" data-f="spokesperson" aria-pressed="false">AI spokesperson</button>
+    <button type="button" data-f="brand" aria-pressed="false">Brand &amp; logo</button>
+  </div>
+
+  <div class="grid">
+    <div class="item" data-c="apparel">
+      <video src="portfolio/occultist-floating-fall.mp4" poster="portfolio/occultist-floating-fall-poster.jpg" controls playsinline preload="none"></video>
+      <h3>"Cursed Shirt" Floating Fall</h3>
+      <div class="client">Ink Poisoning Apparel · Occultist tee</div>
+      <span class="tag">Spec ad</span>
+    </div>
+    <div class="item" data-c="apparel">
+      <video src="portfolio/occultist-ink-wall.mp4" poster="portfolio/occultist-ink-wall-poster.jpg" controls playsinline preload="none"></video>
+      <h3>Ink Wall</h3>
+      <div class="client">Ink Poisoning Apparel · Occultist tee</div>
+      <span class="tag">Spec ad</span>
+    </div>
+    <div class="item" data-c="apparel">
+      <video src="portfolio/occultist-free-fall.mp4" poster="portfolio/occultist-free-fall-poster.jpg" controls playsinline preload="none"></video>
+      <h3>Free Fall</h3>
+      <div class="client">Ink Poisoning Apparel · Occultist tee</div>
+      <span class="tag">Spec ad</span>
+    </div>
+    <div class="item" data-c="apparel">
+      <video src="portfolio/occultist-back-reveal.mp4" poster="portfolio/occultist-back-reveal-poster.jpg" controls playsinline preload="none"></video>
+      <h3>Back Print Reveal</h3>
+      <div class="client">Ink Poisoning Apparel · Occultist tee</div>
+      <span class="tag">Spec ad</span>
+    </div>
+    <div class="item" data-c="product">
+      <video src="portfolio/vtm-vending.mp4" poster="portfolio/vtm-vending-poster.jpg" controls playsinline preload="none"></video>
+      <h3>Trading Card Vending UGC Ad</h3>
+      <div class="client">VTM Vending</div>
+      <span class="tag">Sample ad</span>
+    </div>
+    <div class="item" data-c="spokesperson">
+      <video src="portfolio/freshfeed-spokesperson.mp4" poster="portfolio/freshfeed-spokesperson-poster.jpg" controls playsinline preload="none"></video>
+      <h3>AI Spokesperson Promo</h3>
+      <div class="client">FreshFeed · in-house ad</div>
+      <span class="tag">AI spokesperson</span>
+    </div>
+    <div class="item" data-c="spokesperson">
+      <video src="emilee-ad.mp4?v=2" poster="emilee-poster.jpg?v=2" controls playsinline preload="none"></video>
+      <h3>Meet Emilee</h3>
+      <div class="client">FreshFeed · in-house ad</div>
+      <span class="tag">AI spokesperson</span>
+    </div>
+    <div class="item" data-c="brand">
+      <video src="logo-ad.mp4" poster="logo-ad-poster.jpg" controls playsinline preload="none"></video>
+      <h3>Animated Logo Promo</h3>
+      <div class="client">FreshFeed · in-house ad</div>
+      <span class="tag">Brand &amp; logo</span>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Want videos like these for your brand?</h2>
+    <p>Send us your logo and a few photos. We send back ready-to-post content.</p>
+    <a class="btn" href="order.html?package=sample">Get a sample video: $185</a>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 FreshFeed · <a href="mailto:freshfeed.socialmedia@freshfeedsocial.com" style="color:#fff">freshfeed.socialmedia@freshfeedsocial.com</a></footer>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.filters button'),items=document.querySelectorAll('.item'),vids=document.querySelectorAll('.item video');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.dataset.f;
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    items.forEach(function(i){i.hidden=!(f==='all'||i.dataset.c===f)});
+  })});
+  // only one video plays at a time
+  vids.forEach(function(v){v.addEventListener('play',function(){vids.forEach(function(o){if(o!==v)o.pause()})})});
+})();
+</script>
+</body>
+</html>
