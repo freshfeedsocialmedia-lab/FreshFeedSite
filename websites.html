@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Websites | FreshFeed</title>
+<meta name="description" content="FreshFeed builds clean, fast, mobile-ready websites for local businesses, with a custom video ad built right into the homepage. Request a website or browse demo sites.">
+<meta property="og:title" content="Websites by FreshFeed">
+<meta property="og:description" content="Clean, fast websites with your own video ad built in. Request one or browse our demo sites.">
+<meta property="og:image" content="samples/roofing/preview.jpg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#E9952A;--orange-dark:#C97A14;--dark:#0e0c0b}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-family:Inter,system-ui,sans-serif}
+#scene{position:fixed;inset:0;display:block;touch-action:none}
+.wm{font-family:Nunito,sans-serif;font-weight:900;letter-spacing:-.02em}.wm span{color:var(--orange)}
+.top{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;padding-top:max(16px,env(safe-area-inset-top));z-index:5;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0));pointer-events:none}
+.top a{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#fff;font-size:24px}
+.brand img{height:28px}
+.links{display:flex;gap:10px}
+.pill{font:600 14px Inter,sans-serif;text-decoration:none;color:#fff;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(20,18,16,.55);backdrop-filter:blur(8px);white-space:nowrap;cursor:pointer}
+.pill.o{background:var(--orange);border-color:var(--orange);font-weight:700}
+.title{position:fixed;left:20px;top:84px;z-index:4;max-width:440px;pointer-events:none}
+.shade{position:fixed;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(10,8,6,.78) 0%,rgba(10,8,6,.45) 30%,rgba(10,8,6,0) 52%)}
+@media (max-width:720px){.shade{background:linear-gradient(180deg,rgba(10,8,6,.8) 0%,rgba(10,8,6,.3) 38%,rgba(10,8,6,0) 50%,rgba(10,8,6,0) 78%,rgba(10,8,6,.7) 100%)}}
+.eb{font:700 12px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+.title h1{font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(30px,4.4vw,50px);line-height:1.02;margin:8px 0 10px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.title h1 span{color:var(--orange)}
+.title p{color:#d5cfc8;font-size:15.5px;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.title .acts{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;pointer-events:auto}
+.title .acts .pill{font-size:15px;padding:12px 20px}
+.title .acts .pill.w{background:#fff;color:#111;border-color:#fff}
+.hint{position:fixed;left:0;right:0;bottom:max(16px,env(safe-area-inset-bottom));text-align:center;color:#aaa;font-size:13px;z-index:4;pointer-events:none}
+.tip{position:fixed;z-index:6;pointer-events:none;background:rgba(15,15,17,.9);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;transform:translate(-50%,-140%);display:none;white-space:nowrap}
+@media (max-width:720px){
+ .title{top:70px;left:16px;right:16px}.title p{font-size:14px}.links .hide{display:none}.brand{font-size:21px}
+ .title .acts{position:fixed;left:16px;right:16px;bottom:max(40px,calc(env(safe-area-inset-bottom) + 30px));justify-content:center}
+ .title .acts .pill{flex:1;text-align:center;padding:13px 10px}
+}
+/* panels */
+.panel{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);padding:20px}
+.panel.open{display:flex}
+.sheet{background:#17140f;border:1px solid rgba(255,255,255,.12);border-radius:20px;max-width:640px;width:100%;max-height:88vh;overflow:auto;padding:30px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.sheet h2{font-family:Nunito,sans-serif;font-weight:900;font-size:30px;line-height:1.1;margin:6px 0 8px}
+.sheet p.sub{color:#bdb5ab;margin-bottom:20px;font-size:15.5px;line-height:1.5}
+.x{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font-size:22px;cursor:pointer}
+form{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#ddd}
+input,select,textarea{font:inherit;font-size:16px;padding:12px 14px;border-radius:10px;border:1px solid #3a342c;background:#0f0d0a;color:#fff}
+textarea{min-height:90px;resize:vertical}
+.hidden{display:none}
+.btn{background:var(--orange);color:#fff;border:0;border-radius:999px;padding:14px 24px;font:700 16px Inter,sans-serif;cursor:pointer}
+.btn:hover{background:var(--orange-dark)}
+.demos{display:grid;gap:16px}
+.demo{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px;transition:border-color .2s,background .2s}
+.demo:hover{border-color:var(--orange);background:rgba(233,149,42,.08)}
+.demo img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:8px;display:block}
+.demo h3{font-family:Nunito,sans-serif;font-weight:900;font-size:20px;margin-bottom:4px}
+.demo p{color:#bdb5ab;font-size:14px;line-height:1.45}
+.demo .go{color:var(--orange);font-weight:700;font-size:14px;margin-top:8px;display:inline-block}
+@media (max-width:560px){.demo{grid-template-columns:1fr}}
+.incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin:0 0 22px;font-size:14.5px;color:#ddd}
+.incl li:before{content:"✓";color:var(--orange);font-weight:900;margin-right:8px}
+@media (max-width:560px){.incl{grid-template-columns:1fr}}
+#load{position:fixed;inset:0;z-index:30;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .8s}
+#load.gone{opacity:0;pointer-events:none}
+#load .slate{font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,4.6vw,40px)}
+#load .slate b{color:var(--orange)}
+#load .bar{width:220px;height:3px;background:#222;border-radius:3px;overflow:hidden}
+#load .bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .3s}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<canvas id="scene" aria-label="3D office with a laptop on a desk. The laptop screen has buttons to request a website or browse demo sites."></canvas>
+
+<div class="top">
+  <a class="brand" href="index.html?home" aria-label="FreshFeed home"><img src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+  <div class="links">
+    <a class="pill hide" href="studio.html">3D Studio</a>
+    <a class="pill hide" href="portfolio.html">Portfolio</a>
+    <a class="pill o" href="index.html?home">Show full site →</a>
+  </div>
+</div>
+
+<div class="shade"></div>
+<div class="title">
+  <div class="eb">FreshFeed · Websites</div>
+  <h1>Websites that <span>sell.</span><br>Your video built in.</h1>
+  <p>Clean, fast, mobile-ready sites for local businesses, with a custom AI video ad right on the homepage. Click the laptop to get started.</p>
+  <div class="acts">
+    <button class="pill o" type="button" data-open="request">Request a website</button>
+    <button class="pill w" type="button" data-open="demos">Browse demo sites</button>
+  </div>
+</div>
+<div class="hint" id="hint">Drag to look around · Click the laptop screen</div>
+<div class="tip" id="tip"></div>
+
+<div class="panel" id="request" role="dialog" aria-modal="true" aria-labelledby="rqT">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="Close">×</button>
+    <div class="eb">Request a website</div>
+    <h2 id="rqT">Let's build yours.</h2>
+    <p class="sub">Tell us about your business. We'll reply with a mockup idea and a quote, usually within one business day.</p>
+    <ul class="incl"><li>Mobile-ready design</li><li>Custom video ad on the homepage</li><li>Contact / quote form</li><li>Click-to-call button</li><li>Google map &amp; service area</li><li>You own your domain</li></ul>
+    <form id="rqForm" method="POST" action="https://formsubmit.co/freshfeed.socialmedia@gmail.com">
+      <input type="hidden" name="_subject" value="New WEBSITE request (FreshFeed)">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="">
+      <input type="hidden" name="interest" value="Website">
+      <p class="hidden"><label>Don't fill this out: <input name="_honey"></label></p>
+      <div class="row">
+        <label>Your name<input name="name" required autocomplete="name"></label>
+        <label>Business name<input name="business" required autocomplete="organization"></label>
+      </div>
+      <div class="row">
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+      </div>
+      <div class="row">
+        <label>Do you have a website now?<select name="current_site"><option>No website yet</option><option>Yes, but it needs a redo</option><option>Yes, just want video added</option></select></label>
+        <label>Do you own a domain?<select name="domain"><option>Not sure</option><option>Yes</option><option>No</option></select></label>
+      </div>
+      <label>Current website or socials (optional)<input name="links" placeholder="yourbusiness.com or @yourpage"></label>
+      <label>What do you want the site to do?<textarea name="message" placeholder="Get more quote requests, show off our work, book appointments..."></textarea></label>
+      <button class="btn" type="submit">Send my request →</button>
+    </form>
+  </div>
+</div>
+
+<div class="panel" id="demos" role="dialog" aria-modal="true" aria-labelledby="dmT">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="Close">×</button>
+    <div class="eb">Demo sites</div>
+    <h2 id="dmT">Click around a real build.</h2>
+    <p class="sub">These are sample sites for made-up businesses, built the same way we'd build yours.</p>
+    <div class="demos">
+      <a class="demo" href="samples/roofing/">
+        <img src="samples/roofing/preview.jpg" alt="Summit Ridge Roofing sample website">
+        <div><h3>Summit Ridge Roofing</h3><p>Roofing &amp; storm damage · Omaha. Video hero, services, storm-damage section, free-inspection form and a sticky call bar on phones.</p><span class="go">Open demo site →</span></div>
+      </a>
+    </div>
+    <p class="sub" style="margin:20px 0 0;font-size:14px">More demo sites are on the way. <a href="#" data-open="request" style="color:var(--orange);font-weight:700">Want one for your business? →</a></p>
+  </div>
+</div>
+
+<div id="load"><div class="slate">Opening the <b>office…</b></div><div class="bar"><i id="lbar"></i></div></div>
+
+<script>try{sessionStorage.setItem('ffStudio','1')}catch(e){}
+(function(){
+  const f=document.getElementById('rqForm'); f.elements._next.value=new URL('thank-you.html',location.href).href;
+  function open(id){ document.querySelectorAll('.panel.open').forEach(p=>p.classList.remove('open')); const p=document.getElementById(id); p.classList.add('open'); const el=p.querySelector('input:not([type=hidden]),a.demo'); el&&el.focus(); window.__panelOpen=true; }
+  function close(){ document.querySelectorAll('.panel.open').forEach(p=>p.classList.remove('open')); window.__panelOpen=false; }
+  window.__openPanel=open;
+  document.addEventListener('click',e=>{ const o=e.target.closest('[data-open]'); if(o){ e.preventDefault(); open(o.dataset.open); } if(e.target.closest('[data-close]')||e.target.classList.contains('panel')) close(); });
+  addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  if(location.hash==='#request') open('request'); if(location.hash==='#demos') open('demos');
+})();
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+try { await Promise.race([Promise.all(['900 64px Nunito','800 64px Nunito','600 30px Inter','700 30px Inter'].map(f=>document.fonts.load(f))), new Promise(r=>setTimeout(r,2500))]); } catch(e){}
+
+const AD_VIDEO = 'portfolio/freshfeed-websites-ad.mp4';
+const canvas = document.getElementById('scene');
+const mobile = matchMedia('(max-width:720px)').matches;
+let renderer;
+try { renderer = new THREE.WebGLRenderer({canvas, antialias:true}); } catch(e){ document.getElementById('load').remove(); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, mobile?1.6:2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0e0c0b);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = .35;
+
+const camera = new THREE.PerspectiveCamera(mobile?58:42, innerWidth/innerHeight, .05, 100);
+const LAPTOP = new THREE.Vector3(0, 1.02, 0);
+const HOME = { pos: mobile ? new THREE.Vector3(0.0, 1.75, 3.15) : new THREE.Vector3(-0.5, 1.48, 1.95), tgt: mobile ? new THREE.Vector3(0, 1.25, 0) : new THREE.Vector3(-0.12, 1.12, 0) };
+const START = new THREE.Vector3(2.6, 2.4, 4.6);
+camera.position.copy(START);
+const controls = new OrbitControls(camera, canvas);
+controls.target.copy(HOME.tgt);
+controls.enableDamping = true; controls.dampingFactor = .07;
+controls.enablePan = false;
+controls.minDistance = 1.0; controls.maxDistance = 5.2;
+controls.minPolarAngle = .55; controls.maxPolarAngle = 1.62;
+controls.minAzimuthAngle = -1.05; controls.maxAzimuthAngle = 1.05;
+
+const mgr = new THREE.LoadingManager();
+const lbar = document.getElementById('lbar');
+mgr.onProgress = (u,l,t)=>{ lbar.style.width=(l/t*100)+'%'; };
+mgr.onLoad = ()=>{ setTimeout(()=>document.getElementById('load').classList.add('gone'), 250); intro = 0; };
+const tl = new THREE.TextureLoader(mgr);
+
+function canvasTex(w,h,draw){ const c=document.createElement('canvas'); c.width=w; c.height=h; const x=c.getContext('2d'); draw(x,w,h); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; t.userData={c,x}; return t; }
+function rr(x,a,b,w,h,r){ x.beginPath(); x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r); x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath(); }
+const std = (o)=>new THREE.MeshStandardMaterial(o);
+function mesh(g,m,{cast=true,recv=true}={}){ const o=new THREE.Mesh(g,m); o.castShadow=cast; o.receiveShadow=recv; return o; }
+
+/* ---------- room ---------- */
+const woodTex = canvasTex(1024,1024,(x,w,h)=>{
+  x.fillStyle='#6b4a32'; x.fillRect(0,0,w,h);
+  for(let i=0;i<8;i++){ const y=i*h/8; x.fillStyle=i%2?'#70503a':'#664530'; x.fillRect(0,y,w,h/8-3); x.fillStyle='#3d2a1c'; x.fillRect(0,y+h/8-3,w,3); }
+  for(let i=0;i<500;i++){ x.strokeStyle=`rgba(${40+Math.random()*30},${25+Math.random()*20},10,${.06+Math.random()*.08})`; x.lineWidth=1+Math.random()*2; const y=Math.random()*h; x.beginPath(); x.moveTo(0,y); x.bezierCurveTo(w*.3,y+Math.random()*8-4,w*.6,y+Math.random()*8-4,w,y+Math.random()*6-3); x.stroke(); }
+});
+woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping; woodTex.repeat.set(3,3);
+const floor = mesh(new THREE.PlaneGeometry(14,14), std({map:woodTex, roughness:.55, metalness:.05}), {cast:false});
+floor.rotation.x = -Math.PI/2; scene.add(floor);
+
+const wallMat = std({color:0x2a2420, roughness:.92});
+const back = mesh(new THREE.PlaneGeometry(14,6), wallMat, {cast:false}); back.position.set(0,3,-2.2); scene.add(back);
+const left = mesh(new THREE.PlaneGeometry(10,6), wallMat, {cast:false}); left.position.set(-3.6,3,2.8); left.rotation.y = Math.PI/2; scene.add(left);
+const right = mesh(new THREE.PlaneGeometry(10,6), wallMat, {cast:false}); right.position.set(3.6,3,2.8); right.rotation.y = -Math.PI/2; scene.add(right);
+const ceil = mesh(new THREE.PlaneGeometry(14,10), std({color:0x1a1715, roughness:1}), {cast:false}); ceil.position.set(0,4.2,2.8); ceil.rotation.x = Math.PI/2; scene.add(ceil);
+// wainscot / baseboard
+const base = mesh(new THREE.BoxGeometry(14,.12,.04), std({color:0x15110e})); base.position.set(0,.06,-2.18); scene.add(base);
+
+// big window with dusk skyline
+const sky = canvasTex(2048,1024,(x,w,h)=>{
+  const g=x.createLinearGradient(0,0,0,h); g.addColorStop(0,'#1b2448'); g.addColorStop(.45,'#7a4a6a'); g.addColorStop(.75,'#f08a4b'); g.addColorStop(1,'#ffc27a'); x.fillStyle=g; x.fillRect(0,0,w,h);
+  const sun=x.createRadialGradient(w*.62,h*.82,0,w*.62,h*.82,220); sun.addColorStop(0,'rgba(255,230,170,.95)'); sun.addColorStop(1,'rgba(255,200,120,0)'); x.fillStyle=sun; x.fillRect(0,0,w,h);
+  let bx=0; const rnd=(a,b)=>a+Math.random()*(b-a);
+  while(bx<w){ const bw=rnd(60,170), bh=rnd(180,560); const y=h-bh; x.fillStyle=`rgb(${18+Math.random()*12},${16+Math.random()*10},${28+Math.random()*14})`; x.fillRect(bx,y,bw,bh);
+    for(let wy=y+16; wy<h-12; wy+=22) for(let wx=bx+10; wx<bx+bw-12; wx+=18) if(Math.random()<.35){ x.fillStyle=Math.random()<.7?'rgba(255,205,130,.85)':'rgba(170,210,255,.7)'; x.fillRect(wx,wy,8,11); }
+    bx+=bw+rnd(4,20); }
+});
+const win = new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3), new THREE.MeshBasicMaterial({map:sky, toneMapped:false}));
+win.position.set(0.3,2.35,-2.19); scene.add(win);
+const frameMat = std({color:0x111111, roughness:.5, metalness:.6});
+for (const [w,h,x,y] of [[4.8,.1,0.3,3.55],[4.8,.1,0.3,1.15],[.1,2.5,-2.05,2.35],[.1,2.5,2.65,2.35],[.06,2.3,0.3,2.35],[4.6,.05,0.3,2.35]]) { const f = mesh(new THREE.BoxGeometry(w,h,.08), frameMat); f.position.set(x,y,-2.15); scene.add(f); }
+const sill = mesh(new THREE.BoxGeometry(5,.06,.3), std({color:0x1d1916, roughness:.6})); sill.position.set(0.3,1.1,-2.05); scene.add(sill);
+
+// neon sign on left wall
+const neon = canvasTex(1400,360,(x,w,h)=>{
+  x.font='900 220px Nunito, sans-serif'; x.textBaseline='middle';
+  const a='fresh', b='feed'; const wa=x.measureText(a).width, wb=x.measureText(b).width, sx=w/2-(wa+wb)/2;
+  for (const bl of [50,18,0]){ x.shadowBlur=bl; x.shadowColor='#fff'; x.fillStyle='#fff'; x.fillText(a,sx,h/2); x.shadowColor='#E9952A'; x.fillStyle='#ffc078'; x.fillText(b,sx+wa,h/2); }
+});
+const sign = new THREE.Mesh(new THREE.PlaneGeometry(2.2,.57), new THREE.MeshBasicMaterial({map:neon, transparent:true, toneMapped:false, depthWrite:false, blending:THREE.AdditiveBlending}));
+sign.position.set(-3.58,2.75,.4); sign.rotation.y = Math.PI/2; scene.add(sign);
+const neonLight = new THREE.PointLight(0xE9952A, 2.2, 4, 2); neonLight.position.set(-3.2,2.75,.4); scene.add(neonLight);
+
+// wall TV on right wall playing the website ad (falls back to the demo screenshot)
+const tvG = new THREE.Group();
+tvG.add(mesh(new RoundedBoxGeometry(.98,1.7,.05,4,.02), std({color:0x0a0a0a, roughness:.3, metalness:.6})));
+const tvPoster = tl.load('samples/roofing/preview-mobile.jpg'); tvPoster.colorSpace = THREE.SRGBColorSpace;
+const tvMat = new THREE.MeshBasicMaterial({map:tvPoster, toneMapped:false});
+const tvScr = new THREE.Mesh(new THREE.PlaneGeometry(.9,1.6), tvMat); tvScr.position.z = .027; tvG.add(tvScr);
+tvG.position.set(3.57,2.3,.2); tvG.rotation.y = -Math.PI/2; scene.add(tvG);
+const tvLabel = new THREE.Mesh(new THREE.PlaneGeometry(.98,.2), new THREE.MeshBasicMaterial({map:canvasTex(512,104,(x,w,h)=>{ x.fillStyle='#E9952A'; x.font='800 40px Inter, sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText('▶ WATCH THE AD',w/2,h/2); }), transparent:true, toneMapped:false}));
+tvLabel.position.set(3.57,1.32,.2); tvLabel.rotation.y = -Math.PI/2; scene.add(tvLabel);
+const adVid = document.createElement('video');
+adVid.src = AD_VIDEO; adVid.muted = true; adVid.loop = true; adVid.playsInline = true; adVid.setAttribute('playsinline','');
+adVid.addEventListener('loadeddata', ()=>{ const vt=new THREE.VideoTexture(adVid); vt.colorSpace=THREE.SRGBColorSpace; tvMat.map=vt; tvMat.needsUpdate=true; adVid.play().catch(()=>{}); window.__hasAd=true; });
+adVid.load();
+addEventListener('pointerdown', ()=>{ window.__hasAd && adVid.play().catch(()=>{}); }, {once:true});
+
+// shelf with books + plant
+const shelf = mesh(new THREE.BoxGeometry(1.6,.05,.3), std({color:0x3b2a1d, roughness:.6})); shelf.position.set(-2.3,1.9,-2.04); scene.add(shelf);
+const bookCols = [0xE9952A,0x2f4858,0xd9d2c5,0x5b3a29,0x1f1f1f,0x8a5a2b];
+let bx = -2.95; for (let i=0;i<9;i++){ const bw=.05+Math.random()*.04, bh=.22+Math.random()*.1; const b=mesh(new THREE.BoxGeometry(bw,bh,.2), std({color:bookCols[i%6], roughness:.7})); b.position.set(bx,1.925+bh/2,-2.03); if(i===8) b.rotation.z=.3; scene.add(b); bx+=bw+.012; }
+
+function plant(x,y,z,s=1){
+  const g=new THREE.Group();
+  g.add(mesh(new THREE.CylinderGeometry(.11*s,.08*s,.2*s,24), std({color:0xe8e2d8, roughness:.5})));
+  const leafMat = std({color:0x2f6b3a, roughness:.6, side:THREE.DoubleSide});
+  for(let i=0;i<14;i++){ const l=mesh(new THREE.SphereGeometry(.06*s,10,8), leafMat); l.scale.set(.5,1.8,.15); const a=i*2.4; l.position.set(Math.cos(a)*.06*s,.18*s+Math.random()*.12*s,Math.sin(a)*.06*s); l.rotation.set(Math.sin(a)*.6,a,Math.cos(a)*.6); g.add(l); }
+  g.position.set(x,y,z); scene.add(g); return g;
+}
+plant(-1.75,2.03,-2.03,.9);
+// floor plant
+{ const g=plant(2.6,.3,-1.4,3.2); }
+
+/* ---------- desk ---------- */
+const deskTop = mesh(new RoundedBoxGeometry(2.6,.06,1.15,3,.02), std({map:woodTex, color:0xcaa27c, roughness:.45}));
+deskTop.position.set(0,.75,0); scene.add(deskTop);
+const legMat = std({color:0x1b1b1b, roughness:.35, metalness:.8});
+for (const sx of [-1.18,1.18]) for (const sz of [-.45,.45]) { const l = mesh(new THREE.BoxGeometry(.05,.72,.05), legMat); l.position.set(sx,.36,sz); scene.add(l); }
+for (const sx of [-1.18,1.18]) { const b = mesh(new THREE.BoxGeometry(.05,.05,.95), legMat); b.position.set(sx,.12,0); scene.add(b); }
+// rug
+const rug = mesh(new THREE.CircleGeometry(1.9,64), std({color:0x3a2f2a, roughness:1}), {cast:false}); rug.rotation.x=-Math.PI/2; rug.position.set(0,.004,.5); scene.add(rug);
+const rugRim = new THREE.Mesh(new THREE.RingGeometry(1.78,1.84,64), new THREE.MeshBasicMaterial({color:0xE9952A})); rugRim.rotation.x=-Math.PI/2; rugRim.position.set(0,.006,.5); scene.add(rugRim);
+
+// chair
+{
+  const g = new THREE.Group(), cm = std({color:0x161616, roughness:.6}), mm = std({color:0x2a2a2a, metalness:.8, roughness:.3});
+  const seat = mesh(new RoundedBoxGeometry(.55,.09,.5,3,.03), cm); seat.position.y=.5; g.add(seat);
+  const bk = mesh(new RoundedBoxGeometry(.52,.6,.07,3,.03), cm); bk.position.set(0,.88,.26); bk.rotation.x=-.12; g.add(bk);
+  const post = mesh(new THREE.CylinderGeometry(.03,.03,.38,12), mm); post.position.y=.27; g.add(post);
+  for(let i=0;i<5;i++){ const a=i*Math.PI*2/5; const arm=mesh(new THREE.BoxGeometry(.32,.03,.04), mm); arm.position.set(Math.cos(a)*.16,.07,Math.sin(a)*.16); arm.rotation.y=-a; g.add(arm); const wh=mesh(new THREE.SphereGeometry(.035,10,8), cm); wh.position.set(Math.cos(a)*.31,.035,Math.sin(a)*.31); g.add(wh); }
+  g.position.set(1.05,0,1.05); g.rotation.y=-.6; scene.add(g);
+}
+
+/* ---------- laptop ---------- */
+const alu = std({color:0xb9bcc2, metalness:.85, roughness:.28});
+const laptop = new THREE.Group(); laptop.position.set(0,.78,.05); scene.add(laptop);
+const lbase = mesh(new RoundedBoxGeometry(.9,.022,.62,3,.008), alu); lbase.position.y=.011; laptop.add(lbase);
+const kb = new THREE.Mesh(new THREE.PlaneGeometry(.78,.27), std({color:0x444444, map:canvasTex(780,270,(x,w,h)=>{ x.fillStyle='#111214'; x.fillRect(0,0,w,h); x.fillStyle='#26272b'; for(let r=0;r<5;r++) for(let c=0;c<14;c++){ rr(x,8+c*55,8+r*52,46,44,6); x.fill(); } }), roughness:.85, metalness:0}));
+kb.rotation.x=-Math.PI/2; kb.position.set(0,.0225,-.1); laptop.add(kb);
+const pad = new THREE.Mesh(new THREE.PlaneGeometry(.3,.17), std({color:0xa9adb3, metalness:.6, roughness:.35})); pad.rotation.x=-Math.PI/2; pad.position.set(0,.0225,.17); laptop.add(pad);
+const hinge = new THREE.Group(); hinge.position.set(0,.022,-.3); laptop.add(hinge);
+const lid = mesh(new RoundedBoxGeometry(.9,.6,.014,3,.006), alu); lid.position.set(0,.3,-.007); hinge.add(lid);
+const bezel = new THREE.Mesh(new THREE.PlaneGeometry(.88,.58), std({color:0x0b0b0c, roughness:.2})); bezel.position.set(0,.3,.0005); hinge.add(bezel);
+hinge.rotation.x = -.22;
+
+// laptop screen UI (canvas) with real clickable buttons
+const SW=1600, SH=1000;
+const previewImg = new Image(); previewImg.src = 'samples/roofing/preview.jpg';
+const BTN = { req:{x:120,y:610,w:600,h:120}, demo:{x:750,y:610,w:600,h:120} };
+let hoverBtn = null, pressT = 0;
+const screenTex = canvasTex(SW,SH,()=>{});
+function drawScreen(t=0){
+  const x = screenTex.userData.x, w=SW, h=SH;
+  const g = x.createLinearGradient(0,0,w,h); g.addColorStop(0,'#141414'); g.addColorStop(1,'#241a10'); x.fillStyle=g; x.fillRect(0,0,w,h);
+  // browser chrome
+  x.fillStyle='#2a2a2c'; x.fillRect(0,0,w,64);
+  for (const [i,c] of [[0,'#ff5f57'],[1,'#febc2e'],[2,'#28c840']]) { x.fillStyle=c; x.beginPath(); x.arc(36+i*34,32,11,0,7); x.fill(); }
+  x.fillStyle='#1b1b1d'; rr(x,170,14,w-340,36,18); x.fill();
+  x.fillStyle='#bbb'; x.font='500 22px Inter, sans-serif'; x.textBaseline='middle'; x.fillText('🔒  freshfeedsocial.com/websites', 200, 33);
+  // logo
+  x.font='900 54px Nunito, sans-serif'; x.textBaseline='alphabetic';
+  x.fillStyle='#fff'; x.fillText('fresh',120,170); const fw=x.measureText('fresh').width; x.fillStyle='#E9952A'; x.fillText('feed',120+fw,170);
+  x.fillStyle='#E9952A'; x.font='700 24px Inter, sans-serif'; x.fillText('W E B S I T E S', 124, 220);
+  // headline
+  x.fillStyle='#fff'; x.font='900 92px Nunito, sans-serif';
+  x.fillText("Let's build your", 120, 360);
+  x.fillStyle='#E9952A'; x.fillText('website.', 120, 460);
+  x.fillStyle='#c9c2b8'; x.font='500 30px Inter, sans-serif'; x.fillText('Mobile-ready · Your video ad built in · You own it', 124, 530);
+  // buttons
+  const pulse = (Math.sin(t*3)+1)/2;
+  const b1=BTN.req, b2=BTN.demo;
+  x.save(); x.shadowColor='rgba(233,149,42,'+(.35+pulse*.35)+')'; x.shadowBlur=30+pulse*20;
+  x.fillStyle = hoverBtn==='req' ? '#ffab45' : '#E9952A'; rr(x,b1.x,b1.y,b1.w,b1.h,60); x.fill(); x.restore();
+  x.fillStyle='#fff'; x.font='800 44px Inter, sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText('Request a website →', b1.x+b1.w/2, b1.y+b1.h/2+2);
+  x.fillStyle = hoverBtn==='demo' ? 'rgba(255,255,255,.16)' : 'rgba(255,255,255,.06)'; rr(x,b2.x,b2.y,b2.w,b2.h,60); x.fill();
+  x.strokeStyle='#fff'; x.lineWidth=4; rr(x,b2.x,b2.y,b2.w,b2.h,60); x.stroke();
+  x.fillStyle='#fff'; x.fillText('Browse demo sites', b2.x+b2.w/2, b2.y+b2.h/2+2);
+  x.textAlign='left'; x.textBaseline='alphabetic';
+  // preview card
+  if (previewImg.complete && previewImg.naturalWidth){ x.save(); rr(x,1060,110,420,262,16); x.clip(); x.drawImage(previewImg,1060,110,420,262); x.restore(); x.strokeStyle='rgba(255,255,255,.25)'; x.lineWidth=2; rr(x,1060,110,420,262,16); x.stroke(); x.fillStyle='#9a9288'; x.font='500 22px Inter, sans-serif'; x.fillText('Demo: Summit Ridge Roofing', 1064, 405); }
+  // cursor blink line
+  x.fillStyle='rgba(255,255,255,.35)'; x.font='500 22px Inter, sans-serif'; x.fillText('Click a button on this screen', 124, 820);
+  screenTex.needsUpdate = true;
+}
+previewImg.onload = ()=>drawScreen(0);
+drawScreen(0);
+const screenMat = new THREE.MeshBasicMaterial({map:screenTex, toneMapped:false});
+const screen = new THREE.Mesh(new THREE.PlaneGeometry(.84,.525), screenMat); screen.position.set(0,.305,.001); hinge.add(screen);
+const glow = new THREE.PointLight(0xffc28a, .9, 1.6, 2); glow.position.set(0,1.2,.2); scene.add(glow);
+
+// desk props: mug + steam, lamp, notebook, phone, coaster
+const mug = new THREE.Group();
+mug.add(mesh(new THREE.CylinderGeometry(.045,.04,.1,24), std({color:0xE9952A, roughness:.4})));
+const handle = mesh(new THREE.TorusGeometry(.028,.007,8,20,Math.PI), std({color:0xE9952A, roughness:.4})); handle.position.set(.045,0,0); handle.rotation.z=-Math.PI/2; mug.add(handle);
+const coffee = new THREE.Mesh(new THREE.CircleGeometry(.04,20), std({color:0x3b2414, roughness:.2})); coffee.rotation.x=-Math.PI/2; coffee.position.y=.045; mug.add(coffee);
+mug.position.set(.7,.83,.15); scene.add(mug);
+const steamTex = canvasTex(128,128,(x,w,h)=>{ const g=x.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2); g.addColorStop(0,'rgba(255,255,255,.5)'); g.addColorStop(1,'rgba(255,255,255,0)'); x.fillStyle=g; x.fillRect(0,0,w,h); });
+const steam = []; for(let i=0;i<10;i++){ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:steamTex, transparent:true, depthWrite:false, opacity:0})); s.userData.o=i/10; s.scale.setScalar(.05); scene.add(s); steam.push(s); }
+
+const lamp = new THREE.Group();
+const lm = std({color:0x161616, metalness:.7, roughness:.35});
+lamp.add(mesh(new THREE.CylinderGeometry(.08,.09,.02,24), lm));
+const arm1 = mesh(new THREE.CylinderGeometry(.01,.01,.42,8), lm); arm1.position.set(0,.2,0); arm1.rotation.z=.25; lamp.add(arm1);
+const arm2 = mesh(new THREE.CylinderGeometry(.01,.01,.36,8), lm); arm2.position.set(.12,.47,0); arm2.rotation.z=-1.0; lamp.add(arm2);
+const shade = mesh(new THREE.CylinderGeometry(.03,.075,.11,24,1,true), std({color:0x1c1c1c, roughness:.4, metalness:.6, side:THREE.DoubleSide})); shade.position.set(.28,.53,0); shade.rotation.z=.5; lamp.add(shade);
+const bulb = new THREE.Mesh(new THREE.SphereGeometry(.025,12,10), new THREE.MeshBasicMaterial({color:0xfff1d6})); bulb.position.set(.27,.5,0); lamp.add(bulb);
+lamp.position.set(-1.05,.78,-.3); scene.add(lamp);
+const lampLight = new THREE.SpotLight(0xffd9a8, 6, 3, Math.PI/4, .6, 1.5); lampLight.position.set(-.78,1.27,-.3); lampLight.target.position.set(-.5,.75,.1); lampLight.castShadow=true; lampLight.shadow.mapSize.set(1024,1024); scene.add(lampLight, lampLight.target);
+
+const note = mesh(new THREE.BoxGeometry(.3,.015,.4), std({color:0x1d1d1d, roughness:.8})); note.position.set(-.75,.765,.25); note.rotation.y=.2; scene.add(note);
+const pen = mesh(new THREE.CylinderGeometry(.006,.006,.22,8), std({color:0xE9952A})); pen.rotation.set(Math.PI/2,0,.9); pen.position.set(-.7,.78,.24); scene.add(pen);
+// phone showing mobile site
+const phTex = tl.load('samples/roofing/preview-mobile.jpg'); phTex.colorSpace = THREE.SRGBColorSpace;
+const phone = new THREE.Group();
+phone.add(mesh(new RoundedBoxGeometry(.09,.008,.18,3,.004), std({color:0x111111, metalness:.6, roughness:.3})));
+const phS = new THREE.Mesh(new THREE.PlaneGeometry(.082,.17), new THREE.MeshBasicMaterial({map:phTex, toneMapped:false})); phS.rotation.x=-Math.PI/2; phS.position.y=.0045; phone.add(phS);
+phone.position.set(.5,.784,.32); phone.rotation.y=-.35; scene.add(phone);
+
+/* ---------- lights ---------- */
+scene.add(new THREE.HemisphereLight(0xffe3c4, 0x241a12, .55));
+const winLight = new THREE.DirectionalLight(0xffb27a, 1.8); winLight.position.set(1.5,3.2,-4); winLight.target.position.set(0,.8,.5); winLight.castShadow=true; winLight.shadow.mapSize.set(2048,2048);
+Object.assign(winLight.shadow.camera,{left:-3,right:3,top:3,bottom:-3,near:.5,far:12}); winLight.shadow.bias=-.0005; scene.add(winLight, winLight.target);
+const fill = new THREE.PointLight(0x8fa8ff, 1.2, 8, 2); fill.position.set(2.5,2.6,2.5); scene.add(fill);
+const ceilLight = new THREE.PointLight(0xffe6c9, 3, 9, 2); ceilLight.position.set(0,3.8,1.2); scene.add(ceilLight);
+
+// dust in the window light
+const N = mobile?120:260, dp = new Float32Array(N*3);
+for (let i=0;i<N;i++){ dp[i*3]=(Math.random()-.5)*4; dp[i*3+1]=.8+Math.random()*2.6; dp[i*3+2]=-1.8+Math.random()*2.6; }
+const dg = new THREE.BufferGeometry(); dg.setAttribute('position', new THREE.BufferAttribute(dp,3));
+const dust = new THREE.Points(dg, new THREE.PointsMaterial({color:0xffd9b0, size:.012, transparent:true, opacity:.6, depthWrite:false, blending:THREE.AdditiveBlending}));
+scene.add(dust);
+
+/* ---------- interaction ---------- */
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(), tip = document.getElementById('tip');
+function hitScreen(e){
+  ptr.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1); ray.setFromCamera(ptr, camera);
+  const h = ray.intersectObjects([screen, tvScr, tvLabel])[0]; if(!h) return null;
+  if (h.object !== screen) return 'tv';
+  const px = h.uv.x*SW, py = (1-h.uv.y)*SH;
+  for (const k in BTN){ const b=BTN[k]; if (px>=b.x && px<=b.x+b.w && py>=b.y && py<=b.y+b.h) return k; }
+  return 'screen';
+}
+canvas.addEventListener('pointermove', e=>{
+  if (e.pointerType!=='mouse') return;
+  const k = hitScreen(e); const nb = (k==='req'||k==='demo')?k:null;
+  if (nb!==hoverBtn){ hoverBtn = nb; }
+  canvas.style.cursor = k ? 'pointer' : 'grab';
+  const label = k==='req'?'Request a website':k==='demo'?'Browse demo sites':k==='tv'?(window.__hasAd?'▶ Watch the ad with sound':'Mobile demo'):k==='screen'?'Zoom in on the laptop':'';
+  if (label){ tip.style.display='block'; tip.style.left=e.clientX+'px'; tip.style.top=e.clientY+'px'; tip.textContent=label; } else tip.style.display='none';
+});
+let down=null;
+canvas.addEventListener('pointerdown', e=>{ down=[e.clientX,e.clientY,performance.now()]; idle=0; });
+canvas.addEventListener('pointerup', e=>{
+  if(!down) return; const moved=Math.hypot(e.clientX-down[0],e.clientY-down[1]); const quick=performance.now()-down[2]<500; down=null;
+  if (moved>8 || !quick) return;
+  const k = hitScreen(e); if(!k) return;
+  if (k==='req'){ pressT=1; window.__openPanel('request'); }
+  else if (k==='demo'){ pressT=1; window.__openPanel('demos'); }
+  else if (k==='screen'){ flyTo(new THREE.Vector3(0,1.32,1.0), new THREE.Vector3(0,1.1,-.12)); }
+  else if (k==='tv'){ if(window.__hasAd){ adVid.muted=false; adVid.currentTime=0; adVid.play(); } flyTo(new THREE.Vector3(2.2,2.2,.25), new THREE.Vector3(3.57,2.2,.2)); }
+});
+
+let fly=null, intro=-1, idle=0;
+function flyTo(p,t,d=1.3){ fly={p0:camera.position.clone(),t0:controls.target.clone(),p1:p.clone(),t1:t.clone(),k:0,d}; }
+const ease = t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+const clock = new THREE.Clock(); let lastDraw = 0;
+function tick(){
+  const raw = Math.min(clock.getDelta(), .25), dt = Math.min(raw,.05), t = clock.elapsedTime;
+  if (intro>=0 && intro<1){ intro=Math.min(1,intro+raw/2.6); const k=ease(intro); camera.position.lerpVectors(START,HOME.pos,k); hinge.rotation.x = THREE.MathUtils.lerp(-1.55,-.22,Math.min(1,intro*1.4)); }
+  else if (intro<0) hinge.rotation.x = -1.55;
+  if (fly){ fly.k=Math.min(1,fly.k+raw/fly.d); const k=ease(fly.k); camera.position.lerpVectors(fly.p0,fly.p1,k); controls.target.lerpVectors(fly.t0,fly.t1,k); if(fly.k>=1) fly=null; }
+  if (!fly && !window.__panelOpen){ idle+=dt; if (idle>14 && intro>=1){ flyTo(HOME.pos, HOME.tgt, 2.2); idle=-30; } }
+  if (t-lastDraw > 1/20){ drawScreen(t); lastDraw=t; }
+  steam.forEach(s=>{ const k=((t*.35+s.userData.o)%1); s.position.set(.7+Math.sin(k*9+s.userData.o*6)*.012, .88+k*.25, .15); s.material.opacity=(1-k)*.35*Math.min(1,k*5); s.scale.setScalar(.03+k*.07); });
+  const pa=dust.geometry.attributes.position; for(let i=0;i<N;i++){ let y=pa.array[i*3+1]+dt*.03; if(y>3.4) y=.8; pa.array[i*3+1]=y; pa.array[i*3]+=Math.sin(t*.4+i)*.0006; } pa.needsUpdate=true;
+  neonLight.intensity = 2.0 + Math.sin(t*7)*.08 + (Math.random()<.004?-1.5:0);
+  if (!fly) controls.update();
+  renderer.render(scene,camera);
+  requestAnimationFrame(tick);
+}
+tick();
+addEventListener('resize',()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+</script>
+</body>
+</html>
