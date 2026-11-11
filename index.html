@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>try{if(!location.hash&&!/[?&]home\b/.test(location.search)&&!sessionStorage.getItem('ffStudio')){location.replace('studio.html')}}catch(e){}</script>
+<script>try{var c=navigator.connection||{},slow=c.saveData||/(^|-)2g|3g/.test(c.effectiveType||'')||(navigator.deviceMemory&&navigator.deviceMemory<4)||matchMedia('(prefers-reduced-motion: reduce)').matches;if(!slow&&!location.hash&&!/[?&]home\b/.test(location.search)&&!sessionStorage.getItem('ffStudio')){location.replace('studio.html')}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FreshFeed | Video Ads &amp; Social Content, Omaha-Based, Nationwide</title>
 <meta name="description" content="FreshFeed is an Omaha-based content studio working with businesses nationwide. We create ready-to-post video ads, reels, graphics and captions for trades, Airbnb hosts, real estate agents, athletes, creators and product brands. You post them. We make them.">
@@ -151,6 +151,7 @@ footer{background:var(--dark);color:#b9b9bf;padding:40px 0;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 footer b{color:#fff;font-family:Nunito,sans-serif;font-size:20px}
 footer b span{color:var(--orange)}
+.founding{background:#fff;border:2px dashed var(--orange);border-radius:16px;padding:16px 20px;margin:0 0 26px;font-size:16px;text-align:center}.founding b{color:var(--orange-dark)}
 </style>
 </head>
 <body>
@@ -175,7 +176,7 @@ footer b span{color:var(--orange)}
 <section class="hero">
   <div class="wrap grid">
     <div>
-      <div class="eyebrow">Video ads &amp; social content · Omaha-based, working nationwide</div>
+      <div class="eyebrow">Video ads, websites &amp; social content · Omaha-based, working nationwide</div>
       <h1>Keep your feed <span>fresh.</span><br>We make the content.</h1>
       <p class="lead">Scroll-stopping video ads, reels and graphics, made for your business and delivered ready to post. You keep control of your pages and your ad budget.</p>
       <div class="ctas">
@@ -369,6 +370,7 @@ footer b span{color:var(--orange)}
       <h2>Need a website too?</h2>
       <p>Clean, fast, mobile-ready sites with your video built in. <a href="websites.html" style="color:var(--orange-dark);font-weight:600">See demo sites →</a></p>
     </div>
+    <div class="founding"><b>Founding client offer:</b> our first 5 website clients get <b>3 months of the Care Plan free</b> ($147 value) and a featured spot on our site, in exchange for an honest review.</div>
     <div class="plans">
       <div class="plan">
         <h3>Starter Website</h3>
