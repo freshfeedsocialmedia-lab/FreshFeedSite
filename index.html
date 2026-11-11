@@ -152,6 +152,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 footer b{color:#fff;font-family:Nunito,sans-serif;font-size:20px}
 footer b span{color:var(--orange)}
 .founding{background:#fff;border:2px dashed var(--orange);border-radius:16px;padding:16px 20px;margin:0 0 26px;font-size:16px;text-align:center}.founding b{color:var(--orange-dark)}
+.inside{padding:30px 0 10px}
+.inside .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+.inside a.card3d{display:block;border-radius:18px;overflow:hidden;background:#111;color:#fff;text-decoration:none;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .25s}
+.inside a.card3d:hover{transform:translateY(-4px)}
+.inside a.card3d img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.inside a.card3d .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 20px;background:linear-gradient(transparent,rgba(0,0,0,.82))}
+.inside a.card3d b{display:block;font-size:20px}
+.inside a.card3d span{font-size:14px;opacity:.85}
+@media(max-width:760px){.inside .cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -224,6 +233,17 @@ footer b span{color:var(--orange)}
         <a class="btn" href="order.html">Start your order</a>
       </div>
       <video src="emilee-ad.mp4?v=2" poster="emilee-poster.jpg?v=2" controls playsinline preload="none" aria-label="FreshFeed ad featuring Emilee, an AI spokesperson"></video>
+    </div>
+  </div>
+</section>
+
+<section class="inside" id="inside">
+  <div class="wrap">
+    <div class="eyebrow">Step inside FreshFeed</div>
+    <h2 style="margin:6px 0 0">Built with the same AI tools we use for your content.</h2>
+    <div class="cards">
+      <a class="card3d" href="studio.html"><img src="renders/studio-render-sm.jpg" srcset="renders/studio-render-sm.jpg 960w, renders/studio-render.jpg 1920w" sizes="(max-width:760px) 100vw, 50vw" alt="FreshFeed AI film studio with screens showing our video ads" loading="lazy"><div class="cap"><b>🎬 Tour the AI film studio</b><span>Walk the set and play our latest ads</span></div></a>
+      <a class="card3d" href="websites.html"><img src="renders/office-render-sm.jpg" srcset="renders/office-render-sm.jpg 960w, renders/office-render.jpg 1920w" sizes="(max-width:760px) 100vw, 50vw" alt="FreshFeed office with a laptop showing our website builder and a monitor playing our website ad" loading="lazy"><div class="cap"><b>💻 Visit the website office</b><span>Request a site or browse demo sites</span></div></a>
     </div>
   </div>
 </section>
