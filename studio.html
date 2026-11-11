@@ -121,7 +121,8 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 <div id="load"><div class="slate">Lights… Camera… <b>AI.</b></div><div class="bar"><i id="lbar"></i></div></div>
 <div id="nogl"><div><p style="margin-bottom:18px">Your browser can't show the 3D studio.</p><a class="pill o" href="portfolio.html">Watch our work instead</a></div></div>
 
-<script>try{sessionStorage.setItem('ffStudio','1')}catch(e){}</script>
+<script>try{sessionStorage.setItem('ffStudio','1')}catch(e){}
+setTimeout(function(){var l=document.getElementById('load');l&&l.classList.add('gone');},9000);</script>
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';

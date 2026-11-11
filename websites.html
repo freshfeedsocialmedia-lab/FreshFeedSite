@@ -40,7 +40,8 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 @media (max-width:720px){
  .title{top:70px;left:16px;right:16px}.title p{font-size:14px}.links .hide{display:none}.brand{font-size:21px}
  .title .acts{position:fixed;left:16px;right:16px;bottom:max(40px,calc(env(safe-area-inset-bottom) + 30px));justify-content:center}
- .title .acts .pill{flex:1;text-align:center;padding:13px 10px}
+ .title .acts .pill{flex:1 1 40%;text-align:center;padding:12px 10px}
+ .title .acts .pill:last-child{flex-basis:100%;padding:9px 10px}
 }
 /* panels */
 .panel{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);padding:20px}
@@ -66,6 +67,16 @@ textarea{min-height:90px;resize:vertical}
 .demo p{color:#bdb5ab;font-size:14px;line-height:1.45}
 .demo .go{color:var(--orange);font-weight:700;font-size:14px;margin-top:8px;display:inline-block}
 @media (max-width:560px){.demo{grid-template-columns:1fr}}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tier{position:relative;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px;display:flex;flex-direction:column}
+.tier.hot{border-color:var(--orange);background:rgba(233,149,42,.07)}
+.tier h3{font-family:Nunito,sans-serif;font-weight:900;font-size:20px}
+.tier .pr{font-family:Nunito,sans-serif;font-weight:900;font-size:36px;margin:4px 0 12px}.tier .pr small{font-size:14px;color:#aaa;font-weight:700}
+.tier ul{list-style:none;font-size:14px;color:#ddd;display:grid;gap:7px;margin-bottom:18px;flex:1}
+.tier li:before{content:"✓";color:var(--orange);font-weight:900;margin-right:8px}
+.tier .pill{text-align:center}
+.best{position:absolute;top:-11px;left:18px;background:var(--orange);color:#fff;font:800 11px Inter;letter-spacing:.1em;padding:4px 10px;border-radius:999px}
+@media (max-width:760px){.tiers{grid-template-columns:1fr}}
 .incl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin:0 0 22px;font-size:14.5px;color:#ddd}
 .incl li:before{content:"✓";color:var(--orange);font-weight:900;margin-right:8px}
 @media (max-width:560px){.incl{grid-template-columns:1fr}}
@@ -100,9 +111,10 @@ textarea{min-height:90px;resize:vertical}
   <div class="acts">
     <button class="pill o" type="button" data-open="request">Request a website</button>
     <button class="pill w" type="button" data-open="demos">Browse demo sites</button>
+    <button class="pill" type="button" data-open="pricing">Pricing</button>
   </div>
 </div>
-<div class="hint" id="hint">Drag to look around · Click the laptop screen</div>
+<div class="hint" id="hint">Click the laptop screen · Tap the monitor for sound</div>
 <div class="tip" id="tip"></div>
 
 <div class="panel" id="request" role="dialog" aria-modal="true" aria-labelledby="rqT">
@@ -110,7 +122,7 @@ textarea{min-height:90px;resize:vertical}
     <button class="x" type="button" data-close aria-label="Close">×</button>
     <div class="eb">Request a website</div>
     <h2 id="rqT">Let's build yours.</h2>
-    <p class="sub">Tell us about your business. We'll reply with a mockup idea and a quote, usually within one business day.</p>
+    <p class="sub">Tell us about your business. We'll reply with a mockup idea and a quote, usually within one business day. Ready to buy? <a href="#" data-open="pricing" style="color:var(--orange);font-weight:700">See pricing →</a></p>
     <ul class="incl"><li>Mobile-ready design</li><li>Custom video ad on the homepage</li><li>Contact / quote form</li><li>Click-to-call button</li><li>Google map &amp; service area</li><li>You own your domain</li></ul>
     <form id="rqForm" method="POST" action="https://formsubmit.co/freshfeed.socialmedia@gmail.com">
       <input type="hidden" name="_subject" value="New WEBSITE request (FreshFeed)">
@@ -138,6 +150,34 @@ textarea{min-height:90px;resize:vertical}
   </div>
 </div>
 
+<div class="panel" id="pricing" role="dialog" aria-modal="true" aria-labelledby="prT">
+  <div class="sheet" style="max-width:860px">
+    <button class="x" type="button" data-close aria-label="Close">×</button>
+    <div class="eb">Website pricing</div>
+    <h2 id="prT">Simple, one-time pricing.</h2>
+    <p class="sub">Pick a package and check out securely. We'll reach out within one business day to get started.</p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Starter Website</h3><div class="pr">$499<small> one time</small></div>
+        <ul><li>One-page, mobile-ready site</li><li>Your logo, colors &amp; photos</li><li>Contact form + click-to-call</li><li>Google map, hours &amp; service area</li><li>Live in ~7 days, 1 round of edits</li></ul>
+        <a class="pill" href="order.html?package=web">Buy Starter →</a>
+      </div>
+      <div class="tier hot">
+        <span class="best">BEST VALUE</span>
+        <h3>Launch Pack</h3><div class="pr">$799<small> one time</small></div>
+        <ul><li>Everything in Starter</li><li>Custom AI video ad on your homepage</li><li>3 short launch videos for social</li><li>2 rounds of edits</li></ul>
+        <a class="pill o" href="order.html?package=weblaunch">Buy Launch Pack →</a>
+      </div>
+      <div class="tier">
+        <h3>Care Plan</h3><div class="pr">$49<small>/mo</small></div>
+        <ul><li>Small monthly text &amp; photo updates</li><li>Site kept online &amp; backed up</li><li>Priority fixes</li><li>Cancel anytime</li></ul>
+        <a class="pill" href="order.html?package=webcare">Add Care Plan →</a>
+      </div>
+    </div>
+    <p class="sub" style="margin:18px 0 0;font-size:13.5px">You buy and own your domain (usually $10–20/yr). Extra pages, booking or online stores are quoted separately. Not sure yet? <a href="#" data-open="request" style="color:var(--orange);font-weight:700">Send a request instead →</a></p>
+  </div>
+</div>
+
 <div class="panel" id="demos" role="dialog" aria-modal="true" aria-labelledby="dmT">
   <div class="sheet">
     <button class="x" type="button" data-close aria-label="Close">×</button>
@@ -149,6 +189,10 @@ textarea{min-height:90px;resize:vertical}
         <img src="samples/roofing/preview.jpg" alt="Summit Ridge Roofing sample website">
         <div><h3>Summit Ridge Roofing</h3><p>Roofing &amp; storm damage · Omaha. Video hero, services, storm-damage section, free-inspection form and a sticky call bar on phones.</p><span class="go">Open demo site →</span></div>
       </a>
+      <a class="demo" href="samples/realestate/">
+        <img src="samples/realestate/preview.jpg" alt="Northbrook Realty sample website">
+        <div><h3>Northbrook Realty Group</h3><p>Real estate team · Omaha. Video hero, home-value lead form, featured listing, neighborhood guides and buyer/seller roadmaps.</p><span class="go">Open demo site →</span></div>
+      </a>
     </div>
     <p class="sub" style="margin:20px 0 0;font-size:14px">More demo sites are on the way. <a href="#" data-open="request" style="color:var(--orange);font-weight:700">Want one for your business? →</a></p>
   </div>
@@ -157,6 +201,7 @@ textarea{min-height:90px;resize:vertical}
 <div id="load"><div class="slate">Opening the <b>office…</b></div><div class="bar"><i id="lbar"></i></div></div>
 
 <script>try{sessionStorage.setItem('ffStudio','1')}catch(e){}
+setTimeout(function(){var l=document.getElementById('load');l&&l.classList.add('gone');},9000);
 (function(){
   const f=document.getElementById('rqForm'); f.elements._next.value=new URL('thank-you.html',location.href).href;
   function open(id){ document.querySelectorAll('.panel.open').forEach(p=>p.classList.remove('open')); const p=document.getElementById(id); p.classList.add('open'); const el=p.querySelector('input:not([type=hidden]),a.demo'); el&&el.focus(); window.__panelOpen=true; }
@@ -164,7 +209,7 @@ textarea{min-height:90px;resize:vertical}
   window.__openPanel=open;
   document.addEventListener('click',e=>{ const o=e.target.closest('[data-open]'); if(o){ e.preventDefault(); open(o.dataset.open); } if(e.target.closest('[data-close]')||e.target.classList.contains('panel')) close(); });
   addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
-  if(location.hash==='#request') open('request'); if(location.hash==='#demos') open('demos');
+  if(location.hash==='#request') open('request'); if(location.hash==='#demos') open('demos'); if(location.hash==='#pricing') open('pricing');
 })();
 </script>
 
@@ -197,7 +242,7 @@ scene.environmentIntensity = .35;
 
 const camera = new THREE.PerspectiveCamera(mobile?58:42, innerWidth/innerHeight, .05, 100);
 const LAPTOP = new THREE.Vector3(0, 1.02, 0);
-const HOME = { pos: mobile ? new THREE.Vector3(0.0, 1.75, 3.15) : new THREE.Vector3(-0.5, 1.48, 1.95), tgt: mobile ? new THREE.Vector3(0, 1.25, 0) : new THREE.Vector3(-0.12, 1.12, 0) };
+const HOME = { pos: mobile ? new THREE.Vector3(0.38, 1.8, 3.45) : new THREE.Vector3(-0.3, 1.5, 2.05), tgt: mobile ? new THREE.Vector3(0.38, 1.22, 0) : new THREE.Vector3(0.22, 1.13, 0) };
 const START = new THREE.Vector3(2.6, 2.4, 4.6);
 camera.position.copy(START);
 const controls = new OrbitControls(camera, canvas);
@@ -263,14 +308,19 @@ sign.position.set(-3.58,2.75,.4); sign.rotation.y = Math.PI/2; scene.add(sign);
 const neonLight = new THREE.PointLight(0xE9952A, 2.2, 4, 2); neonLight.position.set(-3.2,2.75,.4); scene.add(neonLight);
 
 // wall TV on right wall playing the website ad (falls back to the demo screenshot)
+// desk monitor next to the laptop, playing the website ad
 const tvG = new THREE.Group();
-tvG.add(mesh(new RoundedBoxGeometry(.98,1.7,.05,4,.02), std({color:0x0a0a0a, roughness:.3, metalness:.6})));
+const monMetal = std({color:0x1a1a1a, roughness:.35, metalness:.7});
+const monBase = mesh(new RoundedBoxGeometry(.26,.018,.2,3,.006), monMetal); monBase.position.y=.009; tvG.add(monBase);
+const monNeck = mesh(new RoundedBoxGeometry(.05,.3,.03,2,.01), monMetal); monNeck.position.set(0,.16,-.05); tvG.add(monNeck);
+const monBody = mesh(new RoundedBoxGeometry(.38,.66,.03,4,.012), std({color:0x0c0c0c, roughness:.3, metalness:.5})); monBody.position.set(0,.56,-.02); tvG.add(monBody);
 const tvPoster = tl.load('portfolio/freshfeed-websites-ad-poster.jpg'); tvPoster.colorSpace = THREE.SRGBColorSpace;
 const tvMat = new THREE.MeshBasicMaterial({map:tvPoster, toneMapped:false});
-const tvScr = new THREE.Mesh(new THREE.PlaneGeometry(.9,1.6), tvMat); tvScr.position.z = .027; tvG.add(tvScr);
-tvG.position.set(3.57,2.3,.2); tvG.rotation.y = -Math.PI/2; scene.add(tvG);
-const tvLabel = new THREE.Mesh(new THREE.PlaneGeometry(.98,.2), new THREE.MeshBasicMaterial({map:canvasTex(512,104,(x,w,h)=>{ x.fillStyle='#E9952A'; x.font='800 40px Inter, sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText('▶ WATCH THE AD',w/2,h/2); }), transparent:true, toneMapped:false}));
-tvLabel.position.set(3.57,1.32,.2); tvLabel.rotation.y = -Math.PI/2; scene.add(tvLabel);
+const tvScr = new THREE.Mesh(new THREE.PlaneGeometry(.35,.622), tvMat); tvScr.position.set(0,.56,.001); tvG.add(tvScr);
+const tvLabel = new THREE.Mesh(new THREE.PlaneGeometry(.34,.07), new THREE.MeshBasicMaterial({map:canvasTex(512,104,(x,w,h)=>{ x.fillStyle='rgba(20,16,12,.85)'; rr(x,4,8,w-8,h-16,40); x.fill(); x.fillStyle='#E9952A'; x.font='800 40px Inter, sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText('▶ TAP FOR SOUND',w/2,h/2+2); }), transparent:true, toneMapped:false}));
+tvLabel.position.set(0,.19,.03); tvG.add(tvLabel);
+tvG.position.set(.8,.78,-.12); tvG.rotation.y = -.38; scene.add(tvG);
+const monGlow = new THREE.PointLight(0xffd2a0, .6, 1.2, 2); monGlow.position.set(.7,1.3,.15); scene.add(monGlow);
 const adVid = document.createElement('video');
 adVid.src = AD_VIDEO; adVid.muted = true; adVid.loop = true; adVid.playsInline = true; adVid.setAttribute('playsinline','');
 adVid.addEventListener('loadeddata', ()=>{ const vt=new THREE.VideoTexture(adVid); vt.colorSpace=THREE.SRGBColorSpace; tvMat.map=vt; tvMat.needsUpdate=true; adVid.play().catch(()=>{}); window.__hasAd=true; });
@@ -375,7 +425,7 @@ const mug = new THREE.Group();
 mug.add(mesh(new THREE.CylinderGeometry(.045,.04,.1,24), std({color:0xE9952A, roughness:.4})));
 const handle = mesh(new THREE.TorusGeometry(.028,.007,8,20,Math.PI), std({color:0xE9952A, roughness:.4})); handle.position.set(.045,0,0); handle.rotation.z=-Math.PI/2; mug.add(handle);
 const coffee = new THREE.Mesh(new THREE.CircleGeometry(.04,20), std({color:0x3b2414, roughness:.2})); coffee.rotation.x=-Math.PI/2; coffee.position.y=.045; mug.add(coffee);
-mug.position.set(.7,.83,.15); scene.add(mug);
+mug.position.set(1.18,.83,.28); scene.add(mug);
 const steamTex = canvasTex(128,128,(x,w,h)=>{ const g=x.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2); g.addColorStop(0,'rgba(255,255,255,.5)'); g.addColorStop(1,'rgba(255,255,255,0)'); x.fillStyle=g; x.fillRect(0,0,w,h); });
 const steam = []; for(let i=0;i<10;i++){ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:steamTex, transparent:true, depthWrite:false, opacity:0})); s.userData.o=i/10; s.scale.setScalar(.05); scene.add(s); steam.push(s); }
 
@@ -396,7 +446,7 @@ const phTex = tl.load('samples/roofing/preview-mobile.jpg'); phTex.colorSpace = 
 const phone = new THREE.Group();
 phone.add(mesh(new RoundedBoxGeometry(.09,.008,.18,3,.004), std({color:0x111111, metalness:.6, roughness:.3})));
 const phS = new THREE.Mesh(new THREE.PlaneGeometry(.082,.17), new THREE.MeshBasicMaterial({map:phTex, toneMapped:false})); phS.rotation.x=-Math.PI/2; phS.position.y=.0045; phone.add(phS);
-phone.position.set(.5,.784,.32); phone.rotation.y=-.35; scene.add(phone);
+phone.position.set(.48,.784,.36); phone.rotation.y=-.35; scene.add(phone);
 
 /* ---------- lights ---------- */
 scene.add(new THREE.HemisphereLight(0xffe3c4, 0x241a12, .55));
@@ -427,7 +477,7 @@ canvas.addEventListener('pointermove', e=>{
   const k = hitScreen(e); const nb = (k==='req'||k==='demo')?k:null;
   if (nb!==hoverBtn){ hoverBtn = nb; }
   canvas.style.cursor = k ? 'pointer' : 'grab';
-  const label = k==='req'?'Request a website':k==='demo'?'Browse demo sites':k==='tv'?(window.__hasAd?'▶ Watch the ad with sound':'Mobile demo'):k==='screen'?'Zoom in on the laptop':'';
+  const label = k==='req'?'Request a website':k==='demo'?'Browse demo sites':k==='tv'?'▶ Watch the ad with sound':k==='screen'?'Zoom in on the laptop':'';
   if (label){ tip.style.display='block'; tip.style.left=e.clientX+'px'; tip.style.top=e.clientY+'px'; tip.textContent=label; } else tip.style.display='none';
 });
 let down=null;
@@ -439,7 +489,7 @@ canvas.addEventListener('pointerup', e=>{
   if (k==='req'){ pressT=1; window.__openPanel('request'); }
   else if (k==='demo'){ pressT=1; window.__openPanel('demos'); }
   else if (k==='screen'){ flyTo(new THREE.Vector3(0,1.32,1.0), new THREE.Vector3(0,1.1,-.12)); }
-  else if (k==='tv'){ if(window.__hasAd){ adVid.muted=false; adVid.currentTime=0; adVid.play(); } flyTo(new THREE.Vector3(2.2,2.2,.25), new THREE.Vector3(3.57,2.2,.2)); }
+  else if (k==='tv'){ if(window.__hasAd){ adVid.muted=false; adVid.currentTime=0; adVid.play(); } { const wp=new THREE.Vector3(); tvScr.getWorldPosition(wp); const n=new THREE.Vector3(0,0,1).applyQuaternion(tvG.quaternion); flyTo(wp.clone().add(n.multiplyScalar(mobile?1.5:1.05)), wp); } }
 });
 
 let fly=null, intro=-1, idle=0;
@@ -454,7 +504,7 @@ function tick(){
   if (fly){ fly.k=Math.min(1,fly.k+raw/fly.d); const k=ease(fly.k); camera.position.lerpVectors(fly.p0,fly.p1,k); controls.target.lerpVectors(fly.t0,fly.t1,k); if(fly.k>=1) fly=null; }
   if (!fly && !window.__panelOpen){ idle+=dt; if (idle>14 && intro>=1){ flyTo(HOME.pos, HOME.tgt, 2.2); idle=-30; } }
   if (t-lastDraw > 1/20){ drawScreen(t); lastDraw=t; }
-  steam.forEach(s=>{ const k=((t*.35+s.userData.o)%1); s.position.set(.7+Math.sin(k*9+s.userData.o*6)*.012, .88+k*.25, .15); s.material.opacity=(1-k)*.35*Math.min(1,k*5); s.scale.setScalar(.03+k*.07); });
+  steam.forEach(s=>{ const k=((t*.35+s.userData.o)%1); s.position.set(1.18+Math.sin(k*9+s.userData.o*6)*.012, .88+k*.25, .28); s.material.opacity=(1-k)*.35*Math.min(1,k*5); s.scale.setScalar(.03+k*.07); });
   const pa=dust.geometry.attributes.position; for(let i=0;i<N;i++){ let y=pa.array[i*3+1]+dt*.03; if(y>3.4) y=.8; pa.array[i*3+1]=y; pa.array[i*3]+=Math.sin(t*.4+i)*.0006; } pa.needsUpdate=true;
   neonLight.intensity = 2.0 + Math.sin(t*7)*.08 + (Math.random()<.004?-1.5:0);
   if (!fly) controls.update();

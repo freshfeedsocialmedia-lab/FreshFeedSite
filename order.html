@@ -82,6 +82,9 @@ textarea{min-height:110px;resize:vertical}
         <label class="pkg"><input type="radio" name="package" value="Sample Video ($185)" data-key="sample" required> <span><strong>Sample Video</strong> · 1 video, one time</span><span class="price">$185</span></label>
         <label class="pkg"><input type="radio" name="package" value="3-Video Pack ($250)" data-key="pack"> <span><strong>3-Video Pack</strong> · 3 videos, one time</span><span class="price">$250</span></label>
         <label class="pkg"><input type="radio" name="package" value="Product Ad Pack ($300)" data-key="product"> <span><strong>Product Ad Pack</strong> · 3 product videos + 5 images, one time</span><span class="price">$300</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Starter Website ($499)" data-key="web"> <span><strong>Starter Website</strong> · one-page mobile site, one time</span><span class="price">$499</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Website Launch Pack ($799)" data-key="weblaunch"> <span><strong>Website Launch Pack</strong> · site + homepage video ad + 3 launch videos</span><span class="price">$799</span></label>
+        <label class="pkg"><input type="radio" name="package" value="Website Care Plan ($49/mo)" data-key="webcare"> <span><strong>Website Care Plan</strong> · updates, hosting &amp; fixes</span><span class="price">$49/mo</span></label>
         <label class="pkg"><input type="radio" name="package" value="Starter Plan ($750/mo)" data-key="starter"> <span><strong>Starter</strong> · 12 videos a month</span><span class="price">$750/mo</span></label>
         <label class="pkg"><input type="radio" name="package" value="Growth Plan ($1,500/mo)" data-key="growth"> <span><strong>Growth</strong> · 20 videos + 8 graphics a month</span><span class="price">$1,500/mo</span></label>
         <label class="pkg"><input type="radio" name="package" value="Full Throttle Plan ($2,500/mo)" data-key="full"> <span><strong>Full Throttle</strong> · 30 videos a month + ad creative</span><span class="price">$2,500/mo</span></label>
@@ -153,7 +156,10 @@ textarea{min-height:110px;resize:vertical}
     starter:'https://buy.stripe.com/aFaaER4nIaAKcxq7PT5Vu03',
     growth:'https://buy.stripe.com/5kQbIV07s4cm1SM5HL5Vu00',
     full:'https://buy.stripe.com/9B63cp5rM38i40U2vz5Vu05',
-    product:'https://buy.stripe.com/cNi28l4nIfV4cxq9Y15Vu04'
+    product:'https://buy.stripe.com/cNi28l4nIfV4cxq9Y15Vu04',
+    web:'',
+    weblaunch:'',
+    webcare:''
   };
   var MAX=9*1024*1024;
   var form=document.getElementById('order'), btn=document.getElementById('submitBtn'), err=document.getElementById('err');
