@@ -127,6 +127,8 @@ setTimeout(function(){var l=document.getElementById('load');l&&l.classList.add('
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 const REELS = [
  {t:'"Everything in This Video Is Fake"', c:'FreshFeed · in-house ad', g:'AI spokesperson', v:'portfolio/freshfeed-ad-2026.mp4?v=2', p:'portfolio/freshfeed-ad-2026-poster.jpg', hero:true},
@@ -190,7 +192,7 @@ const M = {
 };
 
 /* ---------- stage ---------- */
-const floor = new THREE.Mesh(new THREE.CircleGeometry(60, 64), new THREE.MeshStandardMaterial({color:0x121215, roughness:.32, metalness:.35}));
+const floor = new THREE.Mesh(new THREE.CircleGeometry(60, 64), new THREE.MeshStandardMaterial({color:0x0e0e11, roughness:.2, metalness:.25}));
 floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; scene.add(floor);
 // cyclorama backdrop (curved white-grey wall)
 const cyc = new THREE.Mesh(new THREE.CylinderGeometry(20, 20, 16, 64, 1, true, Math.PI*0.62, Math.PI*0.76),
@@ -339,8 +341,18 @@ function softbox(x,z,aimX,aimZ,color){
   if (!mobile){ L.castShadow = true; L.shadow.mapSize.set(1024,1024); L.shadow.bias=-.0004; }
   return g;
 }
-softbox(-7.5,-.5, 0,-5, 0xfff1dc);
-softbox(7.8,-1.5, 0,-5, 0xd9e6ff);
+const softboxes = [softbox(-7.5,-.5, 0,-5, 0xfff1dc), softbox(7.8,-1.5, 0,-5, 0xd9e6ff)];
+/* realistic camera rigs + softboxes (Higgsfield models) */
+{
+  const FITS = {"cinecam": [{"s": 1.2639, "r": 2.6948, "p": [-4.5175, 1.201, 3.4383]}, {"s": 1.2639, "r": -2.6422, "p": [4.729, 1.201, 2.6444]}], "softbox": [{"s": 1.6324, "r": 2.1112, "p": [-7.5284, 1.5515, -0.4277]}, {"s": 1.6324, "r": -1.9926, "p": [7.8139, 1.5515, -1.4158]}]};
+  const gl = new GLTFLoader(manager); gl.setMeshoptDecoder(MeshoptDecoder);
+  const put = (name, olds) => gl.load('models/'+name+'.glb', g=>{
+    FITS[name].forEach((f,i)=>{ const o = i ? g.scene.clone() : g.scene; o.scale.setScalar(f.s); o.rotation.y=f.r; o.position.set(...f.p);
+      o.traverse(m=>{ if(m.isMesh){ m.castShadow=!mobile; m.receiveShadow=true; if(m.material.map) m.material.map.anisotropy=8; } }); scene.add(o);
+      if (olds[i]) olds[i].visible=false; });
+  }, undefined, ()=>{});
+  put('cinecam', rigs); put('softbox', softboxes);
+}
 
 // overhead truss with spot cones
 const truss = new THREE.Group();

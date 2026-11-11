@@ -235,6 +235,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 try { await Promise.race([Promise.all(['900 64px Nunito','800 64px Nunito','600 30px Inter','700 30px Inter'].map(f=>document.fonts.load(f))), new Promise(r=>setTimeout(r,2500))]); } catch(e){}
 
@@ -246,8 +248,8 @@ try { renderer = new THREE.WebGLRenderer({canvas, antialias:true}); } catch(e){ 
 renderer.setPixelRatio(Math.min(devicePixelRatio, mobile?1.6:2));
 renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.25;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -255,7 +257,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0e0c0b);
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = .35;
+scene.environmentIntensity = .7;
 
 const camera = new THREE.PerspectiveCamera(mobile?58:42, innerWidth/innerHeight, .05, 100);
 const LAPTOP = new THREE.Vector3(0, 1.02, 0);
@@ -288,11 +290,12 @@ const woodTex = canvasTex(1024,1024,(x,w,h)=>{
   for(let i=0;i<500;i++){ x.strokeStyle=`rgba(${40+Math.random()*30},${25+Math.random()*20},10,${.06+Math.random()*.08})`; x.lineWidth=1+Math.random()*2; const y=Math.random()*h; x.beginPath(); x.moveTo(0,y); x.bezierCurveTo(w*.3,y+Math.random()*8-4,w*.6,y+Math.random()*8-4,w,y+Math.random()*6-3); x.stroke(); }
 });
 woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping; woodTex.repeat.set(3,3);
-const floor = mesh(new THREE.PlaneGeometry(14,14), std({map:woodTex, roughness:.55, metalness:.05}), {cast:false});
+function rtex(u,rx,ry){ const t=tl.load(u); t.colorSpace=THREE.SRGBColorSpace; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); t.anisotropy=8; return t; }
+const floor = mesh(new THREE.PlaneGeometry(14,14), std({map:rtex('models/tex/oak-floor.jpg',5,5), roughness:.38, metalness:0}), {cast:false});
 floor.rotation.x = -Math.PI/2; scene.add(floor);
 
-const wallMat = std({color:0x2a2420, roughness:.92});
-const back = mesh(new THREE.PlaneGeometry(14,6), wallMat, {cast:false}); back.position.set(0,3,-2.2); scene.add(back);
+const wallMat = std({map:rtex('models/tex/plaster-wall.jpg',2.5,1.5), color:0xf3ece4, roughness:.9});
+const back = mesh(new THREE.PlaneGeometry(14,6), std({map:rtex('models/tex/plaster-wall.jpg',3.5,1.5), color:0xf3ece4, roughness:.9}), {cast:false}); back.position.set(0,3,-2.2); scene.add(back);
 const left = mesh(new THREE.PlaneGeometry(10,6), wallMat, {cast:false}); left.position.set(-3.6,3,2.8); left.rotation.y = Math.PI/2; scene.add(left);
 const right = mesh(new THREE.PlaneGeometry(10,6), wallMat, {cast:false}); right.position.set(3.6,3,2.8); right.rotation.y = -Math.PI/2; scene.add(right);
 const ceil = mesh(new THREE.PlaneGeometry(14,10), std({color:0x1a1715, roughness:1}), {cast:false}); ceil.position.set(0,4.2,2.8); ceil.rotation.x = Math.PI/2; scene.add(ceil);
@@ -308,7 +311,8 @@ const sky = canvasTex(2048,1024,(x,w,h)=>{
     for(let wy=y+16; wy<h-12; wy+=22) for(let wx=bx+10; wx<bx+bw-12; wx+=18) if(Math.random()<.35){ x.fillStyle=Math.random()<.7?'rgba(255,205,130,.85)':'rgba(170,210,255,.7)'; x.fillRect(wx,wy,8,11); }
     bx+=bw+rnd(4,20); }
 });
-const win = new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3), new THREE.MeshBasicMaterial({map:sky, toneMapped:false}));
+const cityTex = tl.load('models/tex/city-view.jpg'); cityTex.colorSpace = THREE.SRGBColorSpace; cityTex.repeat.set(.84,1); cityTex.offset.set(.08,0);
+const win = new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3), new THREE.MeshBasicMaterial({map:cityTex, toneMapped:false}));
 win.position.set(0.3,2.35,-2.19); scene.add(win);
 const frameMat = std({color:0x111111, roughness:.5, metalness:.6});
 for (const [w,h,x,y] of [[4.8,.1,0.3,3.55],[4.8,.1,0.3,1.15],[.1,2.5,-2.05,2.35],[.1,2.5,2.65,2.35],[.06,2.3,0.3,2.35],[4.6,.05,0.3,2.35]]) { const f = mesh(new THREE.BoxGeometry(w,h,.08), frameMat); f.position.set(x,y,-2.15); scene.add(f); }
@@ -358,26 +362,27 @@ function plant(x,y,z,s=1){
 }
 plant(-1.75,2.03,-2.03,.9);
 // floor plant
-{ const g=plant(2.6,.3,-1.4,3.2); }
+const floorPlant = plant(2.6,.3,-1.4,3.2);
 
 /* ---------- desk ---------- */
 const deskTop = mesh(new RoundedBoxGeometry(2.6,.06,1.15,3,.02), std({map:woodTex, color:0xcaa27c, roughness:.45}));
 deskTop.position.set(0,.75,0); scene.add(deskTop);
-const legMat = std({color:0x1b1b1b, roughness:.35, metalness:.8});
-for (const sx of [-1.18,1.18]) for (const sz of [-.45,.45]) { const l = mesh(new THREE.BoxGeometry(.05,.72,.05), legMat); l.position.set(sx,.36,sz); scene.add(l); }
-for (const sx of [-1.18,1.18]) { const b = mesh(new THREE.BoxGeometry(.05,.05,.95), legMat); b.position.set(sx,.12,0); scene.add(b); }
+const legMat = std({color:0x1b1b1b, roughness:.35, metalness:.8}); const deskParts=[deskTop];
+for (const sx of [-1.18,1.18]) for (const sz of [-.45,.45]) { const l = mesh(new THREE.BoxGeometry(.05,.72,.05), legMat); l.position.set(sx,.36,sz); scene.add(l); deskParts.push(l); }
+for (const sx of [-1.18,1.18]) { const b = mesh(new THREE.BoxGeometry(.05,.05,.95), legMat); b.position.set(sx,.12,0); scene.add(b); deskParts.push(b); }
 // rug
 const rug = mesh(new THREE.CircleGeometry(1.9,64), std({color:0x3a2f2a, roughness:1}), {cast:false}); rug.rotation.x=-Math.PI/2; rug.position.set(0,.004,.5); scene.add(rug);
 const rugRim = new THREE.Mesh(new THREE.RingGeometry(1.78,1.84,64), new THREE.MeshBasicMaterial({color:0xE9952A})); rugRim.rotation.x=-Math.PI/2; rugRim.position.set(0,.006,.5); scene.add(rugRim);
 
 // chair
+let oldChair;
 {
   const g = new THREE.Group(), cm = std({color:0x161616, roughness:.6}), mm = std({color:0x2a2a2a, metalness:.8, roughness:.3});
   const seat = mesh(new RoundedBoxGeometry(.55,.09,.5,3,.03), cm); seat.position.y=.5; g.add(seat);
   const bk = mesh(new RoundedBoxGeometry(.52,.6,.07,3,.03), cm); bk.position.set(0,.88,.26); bk.rotation.x=-.12; g.add(bk);
   const post = mesh(new THREE.CylinderGeometry(.03,.03,.38,12), mm); post.position.y=.27; g.add(post);
   for(let i=0;i<5;i++){ const a=i*Math.PI*2/5; const arm=mesh(new THREE.BoxGeometry(.32,.03,.04), mm); arm.position.set(Math.cos(a)*.16,.07,Math.sin(a)*.16); arm.rotation.y=-a; g.add(arm); const wh=mesh(new THREE.SphereGeometry(.035,10,8), cm); wh.position.set(Math.cos(a)*.31,.035,Math.sin(a)*.31); g.add(wh); }
-  g.position.set(1.05,0,1.05); g.rotation.y=-.6; scene.add(g);
+  g.position.set(1.05,0,1.05); g.rotation.y=-.6; scene.add(g); oldChair=g;
 }
 
 /* ---------- laptop ---------- */
@@ -466,8 +471,8 @@ const phS = new THREE.Mesh(new THREE.PlaneGeometry(.082,.17), new THREE.MeshBasi
 phone.position.set(.48,.784,.36); phone.rotation.y=-.35; scene.add(phone);
 
 /* ---------- lights ---------- */
-scene.add(new THREE.HemisphereLight(0xffe3c4, 0x241a12, .55));
-const winLight = new THREE.DirectionalLight(0xffb27a, 1.8); winLight.position.set(1.5,3.2,-4); winLight.target.position.set(0,.8,.5); winLight.castShadow=true; winLight.shadow.mapSize.set(2048,2048);
+scene.add(new THREE.HemisphereLight(0xfff0de, 0x3a2c20, .9));
+const winLight = new THREE.DirectionalLight(0xffc896, 2.6); winLight.position.set(1.5,3.2,-4); winLight.target.position.set(0,.8,.5); winLight.castShadow=true; winLight.shadow.mapSize.set(2048,2048);
 Object.assign(winLight.shadow.camera,{left:-3,right:3,top:3,bottom:-3,near:.5,far:12}); winLight.shadow.bias=-.0005; scene.add(winLight, winLight.target);
 const fill = new THREE.PointLight(0x8fa8ff, 1.2, 8, 2); fill.position.set(2.5,2.6,2.5); scene.add(fill);
 const ceilLight = new THREE.PointLight(0xffe6c9, 3, 9, 2); ceilLight.position.set(0,3.8,1.2); scene.add(ceilLight);
@@ -478,6 +483,28 @@ for (let i=0;i<N;i++){ dp[i*3]=(Math.random()-.5)*4; dp[i*3+1]=.8+Math.random()*
 const dg = new THREE.BufferGeometry(); dg.setAttribute('position', new THREE.BufferAttribute(dp,3));
 const dust = new THREE.Points(dg, new THREE.PointsMaterial({color:0xffd9b0, size:.012, transparent:true, opacity:.6, depthWrite:false, blending:THREE.AdditiveBlending}));
 scene.add(dust);
+
+
+/* ---------- realistic models (Higgsfield) ---------- */
+const FIT = {"desk": {"s": [1.3686, 0.8802, 1.3314], "r": 0, "p": [0.0013, 0.4058, 0.0007]}, "chair": {"s": [0.632, 0.632, 0.632], "r": 3.1416, "p": [1.0496, 0.6007, 1.0497]}, "plant": {"s": [0.8166, 0.8166, 0.8166], "r": 0, "p": [2.6019, 0.776, -1.3983]}, "lamp": {"s": [0.3265, 0.3265, 0.3265], "r": 1.5708, "p": [-0.9997, 1.1203, -0.3005]}, "mug": {"s": [0.07, 0.07, 0.07], "r": 0, "p": [1.1801, 0.865, 0.2801]}, "laptop": {"s": [0.4881, 0.4881, 0.4881], "r": 0, "p": [0.0005, 1.1204, -0.0796]}, "monitor": {"s": [0.5001, 0.5001, 0.5001], "r": -0.38, "p": [0.8129, 1.2855, -0.1381]}};
+const SCR = {"scrLaptop": {"c": [-0.009, 1.1444, -0.4211], "ax": [1.0, -0.0, -0.0008], "ay": [-0.0003, 0.9388, -0.3443], "w": 0.8675, "h": 0.5468}, "scrMonitor": {"c": [0.7971, 1.3649, -0.0919], "ax": [0.9286, -0.0, 0.371], "ay": [-0.0, 1.0, 0.0], "w": 0.4849, "h": 0.7584}};
+function fitPlane(m, f){ m.geometry.dispose(); m.geometry = new THREE.PlaneGeometry(f.w, f.h); const ax=new THREE.Vector3(...f.ax), ay=new THREE.Vector3(...f.ay), az=new THREE.Vector3().crossVectors(ax,ay).normalize(); m.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(ax,ay,az)); m.position.set(...f.c); m.scale.set(1,1,1); m.removeFromParent(); scene.add(m); }
+const gl = new GLTFLoader(mgr); gl.setMeshoptDecoder(MeshoptDecoder);
+function realModel(name, onReady){
+  gl.load('models/'+name+'.glb', g=>{ const o=g.scene, f=FIT[name]; o.scale.set(...f.s); o.rotation.y=f.r; o.position.set(...f.p);
+    o.traverse(m=>{ if(m.isMesh){ m.castShadow=true; m.receiveShadow=true; const mt=m.material; if(mt.map) mt.map.anisotropy=8; } });
+    scene.add(o); onReady&&onReady(o); }, undefined, ()=>{});
+}
+realModel('desk', ()=>deskParts.forEach(p=>p.visible=false));
+realModel('chair', ()=>{ oldChair.visible=false; });
+realModel('plant', ()=>{ floorPlant.visible=false; });
+realModel('lamp', ()=>{ lamp.visible=false; });
+realModel('mug', ()=>{ mug.visible=false; });
+realModel('laptop', ()=>{ [lbase,kb,pad,lid,bezel].forEach(p=>p.visible=false); fitPlane(screen, SCR.scrLaptop);
+  const f=SCR.scrLaptop, w0=f.w/0.949, h0=f.h+0.043*w0, ax=new THREE.Vector3(...f.ax), ay=new THREE.Vector3(...f.ay), n=new THREE.Vector3().crossVectors(ax,ay).normalize();
+  const bz=new THREE.Mesh(new THREE.PlaneGeometry(w0*.985,h0*.985), std({color:0x050506, roughness:.12, metalness:0}));
+  bz.quaternion.copy(screen.quaternion); bz.position.set(...f.c).addScaledVector(ax,.0095*w0).addScaledVector(ay,.0135*w0).addScaledVector(n,-.0006); scene.add(bz); });
+realModel('monitor', ()=>{ [monBase,monNeck,monBody].forEach(p=>p.visible=false); fitPlane(tvScr, SCR.scrMonitor); tvLabel.position.set(0,.12,.14); });
 
 /* ---------- interaction ---------- */
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(), tip = document.getElementById('tip');
@@ -505,8 +532,8 @@ canvas.addEventListener('pointerup', e=>{
   const k = hitScreen(e); if(!k) return;
   if (k==='req'){ pressT=1; window.__openPanel('request'); }
   else if (k==='demo'){ pressT=1; window.__openPanel('demos'); }
-  else if (k==='screen'){ flyTo(new THREE.Vector3(0,1.32,1.0), new THREE.Vector3(0,1.1,-.12)); }
-  else if (k==='tv'){ if(window.__hasAd){ adVid.muted=false; adVid.currentTime=0; adVid.play(); } { const wp=new THREE.Vector3(); tvScr.getWorldPosition(wp); const n=new THREE.Vector3(0,0,1).applyQuaternion(tvG.quaternion); flyTo(wp.clone().add(n.multiplyScalar(mobile?1.5:1.05)), wp); } }
+  else if (k==='screen'){ const wp=new THREE.Vector3(); screen.getWorldPosition(wp); const n=new THREE.Vector3(0,0,1).applyQuaternion(screen.getWorldQuaternion(new THREE.Quaternion())); flyTo(wp.clone().add(n.multiplyScalar(mobile?1.6:1.15)), wp); }
+  else if (k==='tv'){ if(window.__hasAd){ adVid.muted=false; adVid.currentTime=0; adVid.play(); } { const wp=new THREE.Vector3(); tvScr.getWorldPosition(wp); const n=new THREE.Vector3(0,0,1).applyQuaternion(tvScr.getWorldQuaternion(new THREE.Quaternion())); flyTo(wp.clone().add(n.multiplyScalar(mobile?1.5:1.05)), wp); } }
 });
 
 let fly=null, intro=-1, idle=0;
@@ -521,7 +548,7 @@ function tick(){
   if (fly){ fly.k=Math.min(1,fly.k+raw/fly.d); const k=ease(fly.k); camera.position.lerpVectors(fly.p0,fly.p1,k); controls.target.lerpVectors(fly.t0,fly.t1,k); if(fly.k>=1) fly=null; }
   if (!fly && !window.__panelOpen){ idle+=dt; if (idle>14 && intro>=1){ flyTo(HOME.pos, HOME.tgt, 2.2); idle=-30; } }
   if (t-lastDraw > 1/20){ drawScreen(t); lastDraw=t; }
-  steam.forEach(s=>{ const k=((t*.35+s.userData.o)%1); s.position.set(1.18+Math.sin(k*9+s.userData.o*6)*.012, .88+k*.25, .28); s.material.opacity=(1-k)*.35*Math.min(1,k*5); s.scale.setScalar(.03+k*.07); });
+  steam.forEach(s=>{ const k=((t*.35+s.userData.o)%1); s.position.set(1.18+Math.sin(k*9+s.userData.o*6)*.012, .94+k*.25, .28); s.material.opacity=(1-k)*.35*Math.min(1,k*5); s.scale.setScalar(.03+k*.07); });
   const pa=dust.geometry.attributes.position; for(let i=0;i<N;i++){ let y=pa.array[i*3+1]+dt*.03; if(y>3.4) y=.8; pa.array[i*3+1]=y; pa.array[i*3]+=Math.sin(t*.4+i)*.0006; } pa.needsUpdate=true;
   neonLight.intensity = 2.0 + Math.sin(t*7)*.08 + (Math.random()<.004?-1.5:0);
   if (!fly) controls.update();
