@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Oak Coffee (Sample Site) | Built by FreshFeed</title>
+<meta name="description" content="A sample coffee shop website built by FreshFeed. Fictional business, shown as a demo of the sites we build.">
+<meta name="robots" content="noindex">
+<meta property="og:image" content="preview.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23b4542b'/><path d='M10 13h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM21 14h1.5a2.5 2.5 0 0 1 0 5H21' fill='none' stroke='%23fff3e3' stroke-width='2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--clay:#b4542b;--clay2:#963f1b;--cream:#fff6ea;--bean:#2b1a12;--muted:#6d5a4d;--line:#efdfca}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:var(--bean);background:var(--cream);line-height:1.6;font-size:17px}
+h1,h2,h3,.logo{font-family:Fraunces,Georgia,serif;line-height:1.05;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--clay);color:#fff;font-weight:700;text-decoration:none;padding:15px 26px;border-radius:999px;border:0;font-size:16px;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{background:var(--clay2);transform:translateY(-1px)}
+.btn.ghost{background:transparent;border:2px solid var(--bean);color:var(--bean)}
+.ey{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+.demo{background:#111;color:#fff;font-size:14px;text-align:center;padding:9px 16px}
+.demo b{color:#E9952A}.demo a{color:#E9952A;font-weight:700;margin-left:6px;white-space:nowrap}
+header{position:sticky;top:0;z-index:20;background:rgba(255,246,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-size:24px;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:34px;height:34px;border-radius:50%;background:var(--clay);display:grid;place-items:center;color:#fff;font-style:normal;font-size:17px}
+.nav ul{display:flex;gap:26px;list-style:none;align-items:center;font-weight:600;font-size:15px}
+.nav ul a{text-decoration:none}
+@media (max-width:860px){.nav ul .hide{display:none}.nav .btn{padding:10px 16px;font-size:14px}}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding-top:60px;padding-bottom:80px}
+.hero h1{font-size:clamp(46px,7vw,92px);font-weight:800;margin:14px 0 18px}
+.hero h1 span{color:var(--clay);font-style:italic}
+.hero p{font-size:19px;color:var(--muted);max-width:500px;margin-bottom:28px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.open{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-weight:600;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+.open:before{content:"";width:9px;height:9px;border-radius:50%;background:#3aa35b;box-shadow:0 0 0 4px rgba(58,163,91,.18)}
+.cup{position:relative;justify-self:center;width:min(360px,82vw)}
+.cup video{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:200px 200px 26px 26px;display:block;box-shadow:0 40px 80px rgba(43,26,18,.25)}
+.sticker{position:absolute;right:-14px;top:30px;width:110px;height:110px;border-radius:50%;background:var(--clay);color:#fff;display:grid;place-items:center;text-align:center;font:800 15px/1.15 Fraunces,serif;transform:rotate(12deg);box-shadow:0 12px 26px rgba(0,0,0,.2)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:36px}.sticker{right:0}}
+.marq{background:var(--bean);color:var(--cream);overflow:hidden;white-space:nowrap;padding:16px 0;font:800 22px Fraunces,serif}
+.marq div{display:inline-block;animation:mq 26s linear infinite}
+.marq span{margin:0 26px}.marq b{color:#f0a072}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:90px 0}
+.hd{text-align:center;max-width:620px;margin:0 auto 46px}
+.hd h2{font-size:clamp(36px,5vw,60px);font-weight:800;margin:10px 0 10px}
+.hd p{color:var(--muted)}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mcol{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px}
+.mcol h3{font-size:26px;font-weight:800;margin-bottom:14px}
+.item{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.item:last-child{border:0}
+.item b{font-weight:600}.item small{display:block;color:var(--muted);font-size:13.5px}
+.item span{font-weight:700;color:var(--clay)}
+@media (max-width:860px){.menu{grid-template-columns:1fr}}
+.order{background:var(--clay);color:#fff}
+.order .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.order h2{font-size:clamp(34px,4.6vw,56px);font-weight:800;margin-bottom:14px}
+.order p{color:#fde3d2;margin-bottom:24px;font-size:18px}
+.order .btn{background:#fff;color:var(--clay)}
+.order img{width:100%;border-radius:24px;aspect-ratio:1;object-fit:cover;display:block;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.perks{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:26px;font-weight:600}
+.perks span:before{content:"✓ ";color:#ffd9bf}
+@media (max-width:860px){.order .wrap{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tile{border-radius:22px;padding:30px;background:#fff;border:1px solid var(--line)}
+.tile .em{font-size:34px;margin-bottom:10px}
+.tile h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tile p{color:var(--muted);font-size:15.5px}
+@media (max-width:860px){.grid3{grid-template-columns:1fr}}
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.ig div{aspect-ratio:1;border-radius:14px;background-size:cover;background-image:url(latte.jpg)}
+.ig div:nth-child(2){background-position:center 30%;filter:saturate(1.2)}
+.ig div:nth-child(3){background-position:center 70%;filter:sepia(.25)}
+.ig div:nth-child(4){background:var(--bean);color:var(--cream);display:grid;place-items:center;text-align:center;font:800 20px Fraunces,serif;padding:14px}
+@media (max-width:640px){.ig{grid-template-columns:repeat(2,1fr)}}
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.hours{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px}
+.hours h3{font-size:26px;font-weight:800;margin-bottom:12px}
+.hours>div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line)}
+.map{border-radius:22px;min-height:300px;background:repeating-linear-gradient(45deg,#f3e3cd 0 18px,#f8ebd9 18px 36px);display:grid;place-items:center;text-align:center;color:var(--muted);font-weight:600;padding:20px;border:1px solid var(--line)}
+form{display:grid;gap:12px;margin-top:20px}
+input,select{font:inherit;font-size:16px;padding:13px 16px;border:1px solid #e3cfb6;border-radius:999px;background:#fff}
+.hours .ok{display:none;background:#e9f6ec;border:1px solid #a9d6b5;color:#1f5f33;border-radius:14px;padding:10px 14px;font-size:14.5px}
+.note{font-size:13px;color:var(--muted)}
+@media (max-width:860px){.visit .wrap{grid-template-columns:1fr}}
+footer{background:var(--bean);color:#c9b5a5;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#E9952A;font-weight:700}
+</style>
+</head>
+<body>
+<div class="demo">This is a <b>sample website built by FreshFeed</b> for a made-up coffee shop. Want one for your business?<a href="../../websites.html#request">Get yours →</a></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><i>☕</i>Ember &amp; Oak</a>
+    <ul>
+      <li class="hide"><a href="#menu">Menu</a></li>
+      <li class="hide"><a href="#catering">Catering</a></li>
+      <li class="hide"><a href="#visit">Visit</a></li>
+      <li><a class="btn" href="#order">Order ahead</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <div class="ey">Small-batch coffee · Benson, Omaha</div>
+      <h1>Slow mornings, <span>good coffee.</span></h1>
+      <p>House-roasted beans, scratch-made pastries and a corner table with your name on it. Skip the line and order ahead.</p>
+      <div class="ctas"><a class="btn" href="#order">Order ahead →</a><a class="btn ghost" href="#menu">See the menu</a></div>
+      <div class="open">Open today · 6:30am – 4pm</div>
+    </div>
+    <div class="cup">
+      <video src="hero.mp4" poster="latte.jpg" muted autoplay loop playsinline aria-label="Latte art being served"></video>
+      <div class="sticker">Roasted<br>in-house</div>
+    </div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div><span>Lattes</span><b>✺</b><span>Cold brew</span><b>✺</b><span>Pour-over</span><b>✺</b><span>Fresh croissants</span><b>✺</b><span>Oat milk, no charge</span><b>✺</b><span>Lattes</span><b>✺</b><span>Cold brew</span><b>✺</b><span>Pour-over</span><b>✺</b><span>Fresh croissants</span><b>✺</b><span>Oat milk, no charge</span><b>✺</b></div></div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="hd"><div class="ey">The menu</div><h2>Made right, every cup.</h2><p>On your real site, your menu updates in seconds, no reprinting required.</p></div>
+    <div class="menu">
+      <div class="mcol"><h3>Espresso bar</h3>
+        <div class="item"><div><b>Latte</b><small>Double shot, steamed milk</small></div><span>$5.25</span></div>
+        <div class="item"><div><b>Honey Oat Latte</b><small>Local honey, oat milk</small></div><span>$6.00</span></div>
+        <div class="item"><div><b>Cortado</b><small>Equal parts espresso &amp; milk</small></div><span>$4.50</span></div>
+        <div class="item"><div><b>Americano</b><small>Hot or iced</small></div><span>$3.75</span></div>
+      </div>
+      <div class="mcol"><h3>Slow &amp; cold</h3>
+        <div class="item"><div><b>Pour-over</b><small>Rotating single origin</small></div><span>$5.00</span></div>
+        <div class="item"><div><b>Cold Brew</b><small>Steeped 18 hours</small></div><span>$4.75</span></div>
+        <div class="item"><div><b>Brown Sugar Shaken</b><small>Espresso, cinnamon, oat</small></div><span>$6.25</span></div>
+        <div class="item"><div><b>Chai</b><small>House-spiced</small></div><span>$5.25</span></div>
+      </div>
+      <div class="mcol"><h3>From the oven</h3>
+        <div class="item"><div><b>Butter Croissant</b><small>Baked every morning</small></div><span>$3.95</span></div>
+        <div class="item"><div><b>Cardamom Bun</b><small>Our best seller</small></div><span>$4.50</span></div>
+        <div class="item"><div><b>Breakfast Sandwich</b><small>Egg, cheddar, bacon</small></div><span>$8.50</span></div>
+        <div class="item"><div><b>Banana Bread</b><small>Brown butter, walnuts</small></div><span>$3.75</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="wrap">
+    <div>
+      <div class="ey" style="color:#ffd9bf">Order ahead</div>
+      <h2>Skip the line. Grab &amp; go.</h2>
+      <p>Order from your phone and your drink is waiting at the pickup shelf.</p>
+      <div class="perks"><span>Ready in ~5 min</span><span>Earn rewards</span><span>Pay in the app</span></div>
+      <a class="btn" href="#order" onclick="document.getElementById('oknote').style.display='block';return false;">Start my order →</a>
+      <p id="oknote" style="display:none;margin-top:14px;font-size:15px;background:rgba(255,255,255,.15);padding:10px 14px;border-radius:12px">Demo only: on your real site, this opens your online ordering (Toast, Square, Clover and more).</p>
+    </div>
+    <img src="latte.jpg" alt="Latte with heart latte art" loading="lazy">
+  </div>
+</section>
+
+<section id="catering">
+  <div class="wrap">
+    <div class="hd"><div class="ey">More than coffee</div><h2>Bring us to you.</h2></div>
+    <div class="grid3">
+      <div class="tile"><div class="em">🧺</div><h3>Office catering</h3><p>Coffee boxes and pastry trays for meetings, delivered across Omaha.</p></div>
+      <div class="tile"><div class="em">🎁</div><h3>Gift cards</h3><p>The easiest gift in town. Send one by text or email in seconds.</p></div>
+      <div class="tile"><div class="em">🫘</div><h3>Beans to go</h3><p>Take home a bag of this week's roast, ground fresh for your brewer.</p></div>
+    </div>
+    <div class="ig" style="margin-top:40px"><div></div><div></div><div></div><div>Follow along<br>@yourcafe</div></div>
+  </div>
+</section>
+
+<section class="visit" id="visit" style="padding-top:20px">
+  <div class="wrap">
+    <div class="hours">
+      <h3>Hours</h3>
+      <div><span>Mon – Fri</span><b>6:30am – 4pm</b></div>
+      <div><span>Saturday</span><b>7am – 4pm</b></div>
+      <div><span>Sunday</span><b>8am – 2pm</b></div>
+      <p style="margin-top:16px;color:var(--muted)">123 Sample Ave · Omaha, NE<br>(402) 555-0177</p>
+      <form id="f" novalidate>
+        <input placeholder="Email for rewards & new drops" type="email" autocomplete="email">
+        <button class="btn" type="submit">Join the list</button>
+        <div class="ok" id="ok">Demo only: on your real site, this adds people to your email list.</div>
+        <span class="note">Sample site: this form doesn't send anywhere.</span>
+      </form>
+    </div>
+    <div class="map">Your Google Map goes here</div>
+  </div>
+</section>
+
+<footer><div class="wrap"><div>© Ember &amp; Oak Coffee (fictional sample business) · Omaha, NE</div><div>Website &amp; video by <a href="../../websites.html">FreshFeed</a></div></div></footer>
+<script>document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').style.display='block';});</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crosstown Burger Co. (Sample Site) | Built by FreshFeed</title>
+<meta name="description" content="A sample burger bar website built by FreshFeed. Fictional business, shown as a demo of the sites we build.">
+<meta name="robots" content="noindex">
+<meta property="og:image" content="preview.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23ffc629'/><text x='16' y='23' font-size='18' text-anchor='middle' font-family='Arial Black' fill='%23111'>C</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--yel:#ffc629;--red:#e3341f;--ink:#111;--char:#1a1716;--muted:#a59d96}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:#fff;background:var(--char);line-height:1.6;font-size:17px}
+h1,h2,h3,.logo{font-family:Anton,Impact,sans-serif;text-transform:uppercase;line-height:.95;letter-spacing:.01em;font-weight:400}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--yel);color:var(--ink);font-weight:800;text-decoration:none;padding:15px 26px;border-radius:8px;border:0;font-size:16px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;box-shadow:4px 4px 0 var(--red);transition:transform .1s,box-shadow .1s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--red)}
+.btn.out{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none}
+.ey{font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--yel)}
+.demo{background:#000;color:#fff;font-size:14px;text-align:center;padding:9px 16px}
+.demo b{color:#E9952A}.demo a{color:#E9952A;font-weight:700;margin-left:6px;white-space:nowrap}
+header{position:sticky;top:0;z-index:20;background:rgba(17,17,17,.94);backdrop-filter:blur(8px);border-bottom:3px solid var(--yel)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-size:30px;text-decoration:none}.logo span{color:var(--yel)}
+.nav ul{display:flex;gap:24px;list-style:none;align-items:center;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em}
+.nav ul a{text-decoration:none}
+@media (max-width:860px){.nav ul .hide{display:none}.nav .btn{padding:10px 14px;font-size:13px}}
+.hero{background:radial-gradient(ellipse at 70% 40%,#3a2a1f 0%,var(--char) 60%)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:60px;padding-bottom:80px}
+.hero h1{font-size:clamp(60px,10vw,138px);margin:10px 0 14px}
+.hero h1 span{color:var(--yel);display:block}
+.hero p{font-size:19px;color:#ddd5cc;max-width:500px;margin-bottom:28px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.bvid{position:relative;justify-self:center;width:min(340px,80vw)}
+.bvid video{width:100%;aspect-ratio:9/14;object-fit:cover;border-radius:22px;border:4px solid var(--yel);display:block;transform:rotate(2deg);box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.burst{position:absolute;left:-30px;bottom:40px;background:var(--red);color:#fff;font:400 26px/1 Anton,sans-serif;text-transform:uppercase;padding:16px 18px;transform:rotate(-8deg);border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.burst small{display:block;font:800 12px Inter;letter-spacing:.1em;margin-top:6px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:36px}.burst{left:-6px}}
+.ticker{background:var(--yel);color:var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;font:400 26px Anton,sans-serif;text-transform:uppercase}
+.ticker div{display:inline-block;animation:tk 22s linear infinite}
+.ticker span{margin:0 22px}
+@keyframes tk{to{transform:translateX(-50%)}}
+section{padding:90px 0}
+.hd{margin-bottom:40px}
+.hd h2{font-size:clamp(46px,7vw,86px);margin-top:8px}
+.hd p{color:var(--muted);max-width:520px;margin-top:10px}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
+.mi{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:18px 0;border-bottom:2px dashed #3a3330}
+.mi h3{font-size:30px}
+.mi .p{font:400 28px Anton,sans-serif;color:var(--yel)}
+.mi p{grid-column:1/-1;color:var(--muted);font-size:15px}
+.mi .hot{display:inline-block;background:var(--red);font:800 11px Inter;letter-spacing:.1em;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle}
+@media (max-width:860px){.menu{grid-template-columns:1fr}}
+.specials{background:#0d0c0b}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--char);border:2px solid #2d2724;border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.card .day{font:400 18px Anton,sans-serif;color:var(--yel);letter-spacing:.06em}
+.card h3{font-size:40px;margin:6px 0 10px}
+.card p{color:var(--muted)}
+.card:after{content:attr(data-big);position:absolute;right:-6px;bottom:-26px;font:400 110px Anton,sans-serif;color:rgba(255,198,41,.07)}
+@media (max-width:860px){.cards{grid-template-columns:1fr}}
+.bar .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
+.bar video{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;display:block}
+.bar h2{font-size:clamp(44px,6vw,76px);margin:8px 0 16px}
+.bar p{color:#cfc7bf;margin-bottom:20px}
+.bar ul{list-style:none;margin-bottom:28px}
+.bar li{padding:10px 0;border-bottom:1px solid #2d2724;display:flex;justify-content:space-between;font-weight:600}
+.bar li span{color:var(--yel)}
+@media (max-width:860px){.bar .wrap{grid-template-columns:1fr}}
+.book{background:var(--yel);color:var(--ink)}
+.book .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.book h2{font-size:clamp(46px,6.5vw,82px)}
+.book p{font-weight:600;margin:12px 0}
+form{display:grid;gap:12px;background:var(--ink);padding:28px;border-radius:18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input,select{font:inherit;font-size:16px;padding:13px 14px;border-radius:8px;border:2px solid #333;background:#1c1c1c;color:#fff}
+.ok{display:none;background:#203a24;border:1px solid #3f7a49;color:#bfe8c6;border-radius:8px;padding:10px 12px;font-size:14.5px}
+.note{font-size:13px;color:#8d857e}
+@media (max-width:860px){.book .wrap{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+footer{background:#000;color:#8d857e;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#E9952A;font-weight:700}
+.callbar{display:none}
+@media (max-width:860px){.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30}.callbar a{flex:1;text-align:center;padding:15px;font-weight:800;text-transform:uppercase;text-decoration:none;color:var(--ink);background:var(--yel)}.callbar a+a{background:var(--red);color:#fff}body{padding-bottom:52px}}
+</style>
+</head>
+<body>
+<div class="demo">This is a <b>sample website built by FreshFeed</b> for a made-up burger bar. Want one for your business?<a href="../../websites.html#request">Get yours →</a></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Crosstown <span>Burger</span></a>
+    <ul>
+      <li class="hide"><a href="#menu">Menu</a></li>
+      <li class="hide"><a href="#specials">Specials</a></li>
+      <li class="hide"><a href="#bar">Bar</a></li>
+      <li><a class="btn" href="#book">Book a table</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <div class="ey">Smash burgers · Craft cocktails · Old Market, Omaha</div>
+      <h1>Big flavor. <span>No shortcuts.</span></h1>
+      <p>Fresh-ground beef, smashed hot on the flat-top, piled on a toasted brioche bun. Plus a full bar pouring until close.</p>
+      <div class="ctas"><a class="btn" href="#order" onclick="document.getElementById('on').style.display='block';return false;">Order pickup</a><a class="btn out" href="#book">Book a table</a></div>
+      <p id="on" style="display:none;margin-top:16px;font-size:15px;color:var(--yel)">Demo only: on your real site, this opens your online ordering (Toast, Square, DoorDash and more).</p>
+    </div>
+    <div class="bvid">
+      <video src="hero.mp4" poster="burger.jpg" muted autoplay loop playsinline aria-label="Cheeseburger with sesame seeds falling"></video>
+      <div class="burst">Happy hour<small>Mon–Fri 3–6pm</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div><span>Smash burgers</span>★<span>Hand-cut fries</span>★<span>Craft cocktails</span>★<span>Trivia Tuesdays</span>★<span>Late-night menu</span>★<span>Smash burgers</span>★<span>Hand-cut fries</span>★<span>Craft cocktails</span>★<span>Trivia Tuesdays</span>★<span>Late-night menu</span>★</div></div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="hd"><div class="ey">The menu</div><h2>Built to be messy.</h2><p>On your real site, menu prices and specials update in minutes, straight from your phone.</p></div>
+    <div class="menu">
+      <div class="mi"><h3>The Crosstown <span class="hot">Fan fave</span></h3><div class="p">$13</div><p>Double smash patty, American cheese, pickles, onion, house sauce.</p></div>
+      <div class="mi"><h3>Bacon Jam</h3><div class="p">$15</div><p>Smoky bacon jam, white cheddar, crispy shallots, garlic aioli.</p></div>
+      <div class="mi"><h3>Hot Honey Chicken</h3><div class="p">$14</div><p>Fried chicken thigh, hot honey drizzle, slaw, pickles.</p></div>
+      <div class="mi"><h3>The Mushroom Melt</h3><div class="p">$14</div><p>Swiss, roasted mushrooms, caramelized onion, rye.</p></div>
+      <div class="mi"><h3>Hand-Cut Fries</h3><div class="p">$5</div><p>Sea salt or loaded with cheese sauce and bacon (+$3).</p></div>
+      <div class="mi"><h3>Shakes</h3><div class="p">$7</div><p>Vanilla, chocolate, salted caramel. Make it boozy (+$4).</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="specials" id="specials">
+  <div class="wrap">
+    <div class="hd"><div class="ey">Every week</div><h2>Something's always on.</h2></div>
+    <div class="cards">
+      <div class="card" data-big="TUE"><div class="day">Tuesdays · 7pm</div><h3>Trivia night</h3><p>Teams up to 6. Winners take a bar tab home.</p></div>
+      <div class="card" data-big="WED"><div class="day">Wednesdays</div><h3>$8 Smash + fries</h3><p>Our classic smash burger and fries, all night long.</p></div>
+      <div class="card" data-big="FRI"><div class="day">Fri &amp; Sat · 10pm</div><h3>Late-night menu</h3><p>Burgers and fries until 1am, with a DJ on the patio.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bar" id="bar">
+  <div class="wrap">
+    <video src="bar.mp4" poster="bar.jpg" muted autoplay loop playsinline aria-label="Bartender pouring a cocktail"></video>
+    <div>
+      <div class="ey">The bar</div>
+      <h2>Shaken, stirred, poured right.</h2>
+      <p>House cocktails, local drafts and a whiskey list worth sticking around for.</p>
+      <ul><li>Old Market Old Fashioned <span>$12</span></li><li>Spicy Margarita <span>$11</span></li><li>Local draft, rotating <span>$7</span></li><li>Happy hour wells &amp; drafts <span>$5</span></li></ul>
+      <a class="btn" href="#book">Reserve the patio</a>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="wrap">
+    <div>
+      <div class="ey" style="color:var(--red)">Book a table</div>
+      <h2>Save your seat.</h2>
+      <p>Parties of 8+ and private events? Use the form and we'll call you back.</p>
+      <p>123 Sample St · Omaha, NE · (402) 555-0199</p>
+      <p>Mon–Thu 11am–11pm · Fri–Sat 11am–1am · Sun 11am–9pm</p>
+    </div>
+    <form id="f" novalidate>
+      <div class="row"><input placeholder="Name" autocomplete="name"><input placeholder="Phone" type="tel" autocomplete="tel"></div>
+      <div class="row"><input type="date" aria-label="Date"><select aria-label="Party size"><option>2 people</option><option>3–4 people</option><option>5–7 people</option><option>8+ / private event</option></select></div>
+      <button class="btn" type="submit">Request my table</button>
+      <div class="ok" id="ok">Demo only: on your real site, this goes to your reservations (OpenTable, Resy or straight to your phone).</div>
+      <span class="note">Sample site: this form doesn't send anywhere.</span>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap"><div>© Crosstown Burger Co. (fictional sample business) · Omaha, NE</div><div>Website &amp; video by <a href="../../websites.html">FreshFeed</a></div></div></footer>
+<div class="callbar"><a href="#book">Book a table</a><a href="#menu">See menu</a></div>
+<script>document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').style.display='block';});</script>
+</body>
+</html>
