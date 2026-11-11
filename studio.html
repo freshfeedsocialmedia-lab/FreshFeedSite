@@ -25,6 +25,9 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 .links{display:flex;gap:10px}
 .pill{font:600 14px Inter,sans-serif;text-decoration:none;color:#fff;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(20,20,22,.55);backdrop-filter:blur(8px);white-space:nowrap}
 .pill.o{background:var(--orange);border-color:var(--orange)}
+.pill.enter{font-weight:700;box-shadow:0 0 0 0 rgba(233,149,42,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(233,149,42,0)}100%{box-shadow:0 0 0 0 rgba(233,149,42,0)}}
+.mcta{display:none;justify-content:center;gap:8px;margin-bottom:10px}
 .title{position:fixed;left:20px;top:84px;z-index:4;pointer-events:none;max-width:460px}
 .rec{display:inline-flex;align-items:center;gap:8px;font:700 12px Inter,sans-serif;letter-spacing:.18em;color:#ff5a4e}
 .rec:before{content:"";width:9px;height:9px;border-radius:50%;background:#ff3b30;animation:blink 1.2s infinite}
@@ -52,7 +55,7 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 .close{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,20,22,.7);color:#fff;font-size:22px;cursor:pointer}
 @media (max-width:720px){
  .title{top:70px;left:16px;right:16px}.title p{display:none}
- .links .hide{display:none}.brand{font-size:21px}
+ .links .hide{display:none}.brand{font-size:21px}.mcta{display:flex}.hint{font-size:12px}
  .card{flex-direction:column;gap:14px;text-align:center}
  .card video{height:58vh;max-width:88vw}.meta h2{font-size:23px}.meta p{display:none}.meta .btns{justify-content:center}
 }
@@ -73,10 +76,11 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 <canvas id="scene" aria-label="Interactive 3D film studio showing FreshFeed's AI video work"></canvas>
 
 <div class="top">
-  <a class="brand" href="index.html" aria-label="FreshFeed home"><img src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
+  <a class="brand" href="index.html?home" aria-label="FreshFeed home"><img src="icon.svg" alt=""><span class="wm">fresh<span>feed</span></span></a>
   <div class="links">
     <a class="pill hide" href="portfolio.html">Portfolio</a>
-    <a class="pill o" href="order.html?package=sample">Get a sample · $185</a>
+    <a class="pill hide" href="order.html?package=sample">Get a sample · $185</a>
+    <a class="pill o enter" href="index.html?home">Enter site →</a>
   </div>
 </div>
 
@@ -87,6 +91,7 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 </div>
 
 <div class="dock">
+  <div class="mcta"><a class="pill o" href="order.html?package=sample">Get a sample · $185</a><a class="pill" href="index.html?home">Enter site →</a></div>
   <div class="hint" id="hint">Drag to look around · Scroll or pinch to zoom · Tap a screen to watch</div>
   <div class="reels" id="reels"></div>
 </div>
@@ -112,6 +117,7 @@ html,body{height:100%;overflow:hidden;background:var(--dark);color:#fff;font-fam
 <div id="load"><div class="slate">Lights… Camera… <b>AI.</b></div><div class="bar"><i id="lbar"></i></div></div>
 <div id="nogl"><div><p style="margin-bottom:18px">Your browser can't show the 3D studio.</p><a class="pill o" href="portfolio.html">Watch our work instead</a></div></div>
 
+<script>try{sessionStorage.setItem('ffStudio','1')}catch(e){}</script>
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
