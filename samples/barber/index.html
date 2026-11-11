@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharp Line Barber Co. (Sample Site) | Built by FreshFeed</title>
+<meta name="description" content="A sample barbershop website built by FreshFeed. Fictional business, shown as a demo of the sites we build.">
+<meta name="robots" content="noindex">
+<meta property="og:image" content="preview.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23162a22'/><text x='16' y='22' font-size='16' text-anchor='middle' font-family='Georgia' font-weight='bold' fill='%23d9b26f'>SL</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#162a22;--forest2:#1f3a2f;--gold:#d9b26f;--cream:#f4ede1;--red:#b4362c;--ink:#141414;--muted:#9fb0a7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:#fff;background:var(--forest);line-height:1.6;font-size:17px}
+h1,h2,h3,.logo{font-family:Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--gold);color:var(--ink);font-weight:700;text-decoration:none;padding:15px 28px;border-radius:4px;border:0;font-size:15px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.btn:hover{background:#e6c387}
+.btn.out{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.ey{font:600 13px Inter;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.demo{background:#000;color:#fff;font-size:14px;text-align:center;padding:9px 16px}
+.demo b{color:#E9952A}.demo a{color:#E9952A;font-weight:700;margin-left:6px;white-space:nowrap}
+header{border-bottom:1px solid rgba(217,178,111,.25);position:sticky;top:0;z-index:20;background:rgba(22,42,34,.95);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-size:26px;text-decoration:none;display:flex;align-items:center;gap:12px}
+.logo small{display:block;font:600 10px Inter;letter-spacing:.3em;color:var(--gold);margin-top:4px}
+.nav ul{display:flex;gap:26px;list-style:none;align-items:center;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.nav ul a{text-decoration:none}
+@media (max-width:860px){.nav ul .hide{display:none}.nav .btn{padding:10px 14px;font-size:13px}}
+/* barber pole */
+.pole{display:block;flex:none;width:26px;height:120px;border-radius:13px;position:relative;overflow:hidden;border:3px solid #c9c9c9;box-shadow:inset 0 0 8px rgba(0,0,0,.4)}
+.pole:before{content:"";position:absolute;inset:-60px 0 0 0;background:repeating-linear-gradient(-45deg,#fff 0 10px,var(--red) 10px 20px,#fff 20px 30px,#1f4fa0 30px 40px);animation:spin 2.2s linear infinite}
+@keyframes spin{to{transform:translateY(56px)}}
+.pole.sm{width:16px;height:38px;border-width:2px;border-radius:8px}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 75% 30%,#24493b 0%,var(--forest) 60%)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding-top:80px;padding-bottom:90px}
+.hero h1{font-size:clamp(56px,9vw,120px);margin:14px 0 18px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:19px;color:#cfdbd4;max-width:500px;margin-bottom:28px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.badge{justify-self:center;position:relative;width:min(340px,80vw);aspect-ratio:1;border-radius:50%;border:3px solid var(--gold);display:grid;place-items:center;text-align:center;background:radial-gradient(circle,#1f3a2f,#12231c)}
+.badge:before{content:"";position:absolute;inset:14px;border-radius:50%;border:1px dashed rgba(217,178,111,.6)}
+.badge h2{font-size:46px;line-height:.95}.badge .ey{font-size:11px}
+.badge .pole{margin:12px auto}
+.badge .est{font:600 12px Inter;letter-spacing:.3em;color:var(--gold)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:44px}}
+.strip{background:var(--gold);color:var(--ink)}
+.strip .wrap{display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;padding-top:16px;padding-bottom:16px;font:700 15px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+section{padding:90px 0}
+.hd{text-align:center;margin-bottom:44px}
+.hd h2{font-size:clamp(42px,6vw,72px);margin-top:10px}
+.hd p{color:var(--muted);margin-top:10px}
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 56px;max-width:900px;margin:0 auto}
+.s{display:flex;align-items:baseline;gap:12px;padding:16px 0;border-bottom:1px solid rgba(217,178,111,.18)}
+.s h3{font-size:24px;white-space:nowrap}
+.s i{flex:1;border-bottom:2px dotted rgba(217,178,111,.4);transform:translateY(-6px)}
+.s b{font:700 24px Oswald;color:var(--gold)}
+.s small{display:block;font:400 14px Inter;color:var(--muted);text-transform:none;letter-spacing:0;margin-top:4px}
+@media (max-width:760px){.svc{grid-template-columns:1fr}}
+.team{background:var(--cream);color:var(--ink)}
+.team .hd p{color:#6b6458}
+.barbers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.b{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.08)}
+.b .ph{aspect-ratio:4/5;display:grid;place-items:center;background:linear-gradient(160deg,#2a4a3d,#132620);color:var(--gold);font:700 60px Oswald;position:relative}
+.b .ph span{position:absolute;bottom:12px;font:500 12px Inter;color:#cfdbd4;letter-spacing:.06em}
+.b div.t{padding:20px}
+.b h3{font-size:26px}
+.b p{color:#6b6458;font-size:15px;margin:4px 0 14px}
+.b a{font-weight:700;color:var(--forest);font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:860px){.barbers{grid-template-columns:1fr}}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal div{aspect-ratio:1;border:2px dashed rgba(217,178,111,.35);border-radius:6px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:14px;padding:12px}
+@media (max-width:760px){.gal{grid-template-columns:repeat(2,1fr)}}
+.book .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.book h2{font-size:clamp(42px,6vw,70px);margin:10px 0 14px}
+.book p{color:#cfdbd4;margin-bottom:10px}
+.hrs div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(217,178,111,.18)}
+form{display:grid;gap:12px;background:var(--forest2);border:1px solid rgba(217,178,111,.3);padding:28px;border-radius:8px}
+form h3{font-size:28px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input,select{font:inherit;font-size:16px;padding:13px 14px;border-radius:4px;border:1px solid #3c5b4e;background:#10201a;color:#fff}
+.ok{display:none;background:#203a24;border:1px solid #3f7a49;color:#bfe8c6;border-radius:6px;padding:10px 12px;font-size:14.5px}
+.note{font-size:13px;color:var(--muted)}
+@media (max-width:860px){.book .wrap{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+footer{background:#0d1a15;color:var(--muted);padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#E9952A;font-weight:700}
+.callbar{display:none}
+@media (max-width:860px){.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30}.callbar a{flex:1;text-align:center;padding:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:var(--gold)}.callbar a+a{background:var(--red);color:#fff}body{padding-bottom:52px}}
+</style>
+</head>
+<body>
+<div class="demo">This is a <b>sample website built by FreshFeed</b> for a made-up barbershop. Want one for your business?<a href="../../websites.html#request">Get yours →</a></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span class="pole sm" aria-hidden="true"></span><span>Sharp Line<small>BARBER CO · OMAHA</small></span></a>
+    <ul>
+      <li class="hide"><a href="#services">Services</a></li>
+      <li class="hide"><a href="#team">Barbers</a></li>
+      <li class="hide"><a href="#book">Hours</a></li>
+      <li><a class="btn" href="#book">Book now</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <div class="ey">Fades · Beards · Hot towel shaves</div>
+      <h1>Look sharp.<br><span>Feel sharper.</span></h1>
+      <p>Clean fades, crisp lineups and straight-razor shaves in a chair you'll want to come back to. Walk-ins welcome, appointments first.</p>
+      <div class="ctas"><a class="btn" href="#book">Book your cut →</a><a class="btn out" href="#services">See prices</a></div>
+    </div>
+    <div class="badge" aria-hidden="true">
+      <div>
+        <div class="est">EST. 20XX</div>
+        <span class="pole"></span>
+        <h2>Sharp<br>Line</h2>
+        <div class="ey" style="margin-top:8px">Barber Co.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><div class="wrap"><span>Walk-ins welcome</span><span>Book online 24/7</span><span>Kids cuts</span><span>Cash &amp; card</span></div></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="hd"><div class="ey">The menu</div><h2>Services &amp; prices</h2><p>On your real site, customers book any of these online in a couple of taps.</p></div>
+    <div class="svc">
+      <div class="s"><h3>Classic cut<small>Clippers &amp; scissors, styled</small></h3><i></i><b>$30</b></div>
+      <div class="s"><h3>Skin fade<small>Bald fade, lineup included</small></h3><i></i><b>$35</b></div>
+      <div class="s"><h3>Cut + beard<small>Fade or cut plus beard shape-up</small></h3><i></i><b>$45</b></div>
+      <div class="s"><h3>Beard trim<small>Shape, line and hot towel</small></h3><i></i><b>$20</b></div>
+      <div class="s"><h3>Hot towel shave<small>Straight razor, the full ritual</small></h3><i></i><b>$40</b></div>
+      <div class="s"><h3>Kids cut<small>12 and under</small></h3><i></i><b>$22</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="team">
+  <div class="wrap">
+    <div class="hd"><div class="ey" style="color:#9a7a3e">Meet the barbers</div><h2 style="color:var(--forest)">Pick your chair</h2><p>On your real site, every barber gets a photo, specialties and their own booking link.</p></div>
+    <div class="barbers">
+      <div class="b"><div class="ph">B1<span>Barber photo goes here</span></div><div class="t"><h3>Barber one</h3><p>Fades &amp; designs · Tue–Sat</p><a href="#book">Book with them →</a></div></div>
+      <div class="b"><div class="ph">B2<span>Barber photo goes here</span></div><div class="t"><h3>Barber two</h3><p>Beards &amp; razor shaves · Mon–Fri</p><a href="#book">Book with them →</a></div></div>
+      <div class="b"><div class="ph">B3<span>Barber photo goes here</span></div><div class="t"><h3>Barber three</h3><p>Classic cuts &amp; kids · Wed–Sun</p><a href="#book">Book with them →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="hd"><div class="ey">Fresh cuts</div><h2>The work</h2><p>Your best cuts, straight from your Instagram, live here.</p></div>
+    <div class="gal"><div>Your cut photo</div><div>Your cut photo</div><div>Your cut photo</div><div>Your cut photo</div></div>
+  </div>
+</section>
+
+<section class="book" id="book" style="padding-top:20px">
+  <div class="wrap">
+    <div>
+      <div class="ey">Hours &amp; location</div>
+      <h2>Pull up a chair.</h2>
+      <p>123 Sample St · Omaha, NE · (402) 555-0133</p>
+      <div class="hrs">
+        <div><span>Mon – Fri</span><b>9am – 7pm</b></div>
+        <div><span>Saturday</span><b>8am – 4pm</b></div>
+        <div><span>Sunday</span><b>Closed</b></div>
+      </div>
+    </div>
+    <form id="f" novalidate>
+      <h3>Book your cut</h3>
+      <div class="row"><input placeholder="Name" autocomplete="name"><input placeholder="Phone" type="tel" autocomplete="tel"></div>
+      <div class="row"><select aria-label="Service"><option>Skin fade</option><option>Classic cut</option><option>Cut + beard</option><option>Beard trim</option><option>Hot towel shave</option><option>Kids cut</option></select><select aria-label="Barber"><option>Any barber</option><option>Barber one</option><option>Barber two</option><option>Barber three</option></select></div>
+      <input type="date" aria-label="Date">
+      <button class="btn" type="submit">Request appointment</button>
+      <div class="ok" id="ok">Demo only: on your real site, this books straight into your calendar (Square, Booksy, Squire and more).</div>
+      <span class="note">Sample site: this form doesn't send anywhere.</span>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap"><div>© Sharp Line Barber Co. (fictional sample business) · Omaha, NE</div><div>Website by <a href="../../websites.html">FreshFeed</a></div></div></footer>
+<div class="callbar"><a href="#book">Book now</a><a href="#services">Prices</a></div>
+<script>document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').style.display='block';});</script>
+</body>
+</html>
