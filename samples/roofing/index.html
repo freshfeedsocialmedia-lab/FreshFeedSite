@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summit Ridge Roofing (Sample Site) | Built by FreshFeed</title>
+<meta name="description" content="A sample roofing company website built by FreshFeed. Fictional business, shown as a demo of the sites we build.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 17 16 5l14 12' fill='none' stroke='%23d9411e' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d9411e;--red-d:#b5331464;--navy:#14202e;--navy2:#1d2c3e;--sand:#f5f1ea;--ink:#1b1f24;--muted:#5b6470;--line:#e4ddd2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.6;font-size:17px}
+h1,h2,h3,.logo{font-family:Archivo,system-ui,sans-serif;line-height:1.05;letter-spacing:-.015em}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:700;text-decoration:none;padding:15px 26px;border-radius:6px;border:0;font-size:16px;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{background:#c13715;transform:translateY(-1px)}
+.btn.line{background:transparent;border:2px solid rgba(255,255,255,.55);color:#fff}
+.btn.line:hover{background:rgba(255,255,255,.1)}
+.kicker{font:800 13px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+
+/* demo ribbon */
+.demo{background:#111;color:#fff;font-size:14px;text-align:center;padding:9px 16px}
+.demo b{color:#E9952A}.demo a{color:#E9952A;font-weight:700;margin-left:6px;white-space:nowrap}
+
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;text-decoration:none;text-transform:uppercase}
+.logo svg{width:34px;height:34px}
+.logo small{display:block;font:600 11px Inter,sans-serif;letter-spacing:.2em;color:var(--muted)}
+.nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+.nav ul a{text-decoration:none;font-weight:600;font-size:15px}
+.phone{font:800 17px Archivo,sans-serif;text-decoration:none;color:var(--navy)}
+@media (max-width:860px){.nav ul .hide{display:none}.nav .btn{padding:10px 14px;font-size:14px}}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-40px;background:url(roof-poster.jpg) center/cover;filter:blur(28px) brightness(.38) saturate(1.2);transform:scale(1.1)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;padding-top:80px;padding-bottom:80px}
+.hero h1{font-size:clamp(40px,6vw,70px);font-weight:900;text-transform:uppercase;margin:14px 0 18px}
+.hero h1 span{color:#ff7a50}
+.hero p.lead{font-size:19px;color:#d9dee5;max-width:540px;margin-bottom:28px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:18px;flex-wrap:wrap;margin-top:30px;font-size:14px;color:#c9d0d9;font-weight:600}
+.chips span:before{content:"✓";color:#ff7a50;margin-right:6px;font-weight:900}
+.reel{position:relative;justify-self:center;width:min(320px,80vw)}
+.reel video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:22px;border:6px solid #0b1219;box-shadow:0 40px 80px rgba(0,0,0,.5);display:block;background:#000}
+.reel .tag{position:absolute;left:-26px;bottom:44px;background:#fff;color:var(--ink);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;box-shadow:0 14px 30px rgba(0,0,0,.3)}
+.reel .tag b{display:block;font:900 20px Archivo,sans-serif;color:var(--red)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:50px;padding-bottom:60px;gap:36px}.reel .tag{left:-10px}}
+
+/* strip */
+.strip{background:var(--red);color:#fff}
+.strip .wrap{display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px;padding-top:18px;padding-bottom:18px;font:800 15px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+
+section{padding:90px 0}
+.head{max-width:640px;margin-bottom:44px}
+.head h2{font-size:clamp(32px,4.4vw,48px);font-weight:900;text-transform:uppercase;margin:10px 0 12px}
+.head p{color:var(--muted)}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc .c{border:1px solid var(--line);border-radius:10px;padding:28px;transition:border-color .2s,transform .2s;background:#fff}
+.svc .c:hover{border-color:var(--red);transform:translateY(-3px)}
+.svc .ic{width:48px;height:48px;border-radius:8px;background:#fdece6;display:grid;place-items:center;margin-bottom:16px}
+.svc .ic svg{width:26px;height:26px;stroke:var(--red)}
+.svc h3{font-size:21px;font-weight:800;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:15.5px}
+@media (max-width:860px){.svc{grid-template-columns:1fr}}
+
+/* storm callout */
+.storm{background:var(--sand)}
+.storm .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.storm img{width:100%;border-radius:12px;display:block;aspect-ratio:1;object-fit:cover}
+.storm h2{font-size:clamp(30px,4vw,44px);font-weight:900;text-transform:uppercase;margin:10px 0 14px}
+.storm ul{list-style:none;margin:22px 0 28px}
+.storm li{padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line)}
+.storm li:before{content:"";position:absolute;left:0;top:13px;width:20px;height:20px;border-radius:50%;background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+@media (max-width:860px){.storm .wrap{grid-template-columns:1fr}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;counter-reset:s}
+.steps div{counter-increment:s;padding-top:20px;border-top:3px solid var(--navy)}
+.steps div:before{content:"0" counter(s);font:900 46px Archivo,sans-serif;color:var(--red);display:block;line-height:1;margin-bottom:12px}
+.steps h3{font-size:21px;font-weight:800;margin-bottom:6px}
+.steps p{color:var(--muted);font-size:15.5px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* reviews placeholder */
+.rev{background:var(--navy);color:#fff}
+.rev .head p{color:#b8c2ce}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rgrid .r{border:2px dashed rgba(255,255,255,.25);border-radius:10px;padding:26px;color:#b8c2ce;font-size:15px}
+.rgrid .r .st{color:#ffb547;letter-spacing:3px;margin-bottom:10px}
+.rgrid .r b{color:#fff;display:block;margin-top:12px}
+@media (max-width:860px){.rgrid{grid-template-columns:1fr}}
+
+/* area + contact */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.towns{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 30px}
+.towns span{background:var(--sand);border-radius:999px;padding:8px 16px;font-weight:600;font-size:15px}
+.info p{margin-bottom:8px}.info b{font-family:Archivo,sans-serif}
+form{background:var(--sand);border-radius:12px;padding:30px;display:grid;gap:14px}
+form h3{font-size:24px;font-weight:900;text-transform:uppercase}
+label{font-size:14px;font-weight:600;display:grid;gap:6px}
+input,select,textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid #d6cdbf;border-radius:6px;background:#fff}
+textarea{min-height:100px;resize:vertical}
+.note{font-size:13px;color:var(--muted)}
+.ok{display:none;background:#e5f5ea;border:1px solid #9fd6b0;color:#1d5f33;border-radius:8px;padding:12px 14px;font-size:15px}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{background:#0d151e;color:#8f9aa7;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:#E9952A;font-weight:700}
+
+/* sticky mobile call bar */
+.callbar{display:none}
+@media (max-width:860px){.callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:1px;background:#0d151e}.callbar a{flex:1;text-align:center;padding:15px;font-weight:800;text-decoration:none;color:#fff;background:var(--red)}.callbar a+a{background:var(--navy2)}body{padding-bottom:54px}}
+</style>
+</head>
+<body>
+
+<div class="demo">This is a <b>sample website built by FreshFeed</b> for a made-up roofing company. Want one for your business?<a href="../../index.html?home#contact">Get yours →</a></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="6" fill="#14202e"/><path d="M6 19 17 9l11 10" fill="none" stroke="#d9411e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 18v8h14v-8" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      <span>Summit Ridge<small>Roofing · Omaha</small></span>
+    </a>
+    <ul>
+      <li class="hide"><a href="#services">Services</a></li>
+      <li class="hide"><a href="#storm">Storm damage</a></li>
+      <li class="hide"><a href="#contact">Service area</a></li>
+      <li class="hide"><a class="phone" href="#contact">(402) 555-0100</a></li>
+      <li><a class="btn" href="#contact">Free inspection</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <div class="kicker" style="color:#ff7a50">Omaha · Elkhorn · Papillion · Council Bluffs</div>
+      <h1>Omaha roofs,<br>done right <span>the first time.</span></h1>
+      <p class="lead">Hail hit? Leak in the ceiling? We'll climb up, show you photos of exactly what we find, and give you a straight quote — no pressure, no runaround.</p>
+      <div class="ctas">
+        <a class="btn" href="#contact">Book a free inspection →</a>
+        <a class="btn line" href="#storm">Storm damage help</a>
+      </div>
+      <div class="chips"><span>Free photo inspections</span><span>Insurance claim help</span><span>Written estimates</span></div>
+    </div>
+    <div class="reel">
+      <video src="roof.mp4" poster="roof-poster.jpg" muted autoplay loop playsinline aria-label="Roofer at work on a shingle roof"></video>
+      <div class="tag"><b>Same-week</b>inspections</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><div class="wrap"><span>Replacements</span><span>Repairs</span><span>Hail &amp; wind damage</span><span>Gutters</span><span>Insurance claims</span></div></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker">What we do</div>
+      <h2>Everything over your head.</h2>
+      <p>From one missing shingle to a full tear-off, every job starts with a free inspection and a photo report you can actually understand.</p>
+    </div>
+    <div class="svc">
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></div><h3>Roof replacement</h3><p>Full tear-off and new architectural shingles, with cleanup crews that leave your yard better than they found it.</p></div>
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div><h3>Roof repair</h3><p>Leaks, lifted shingles, flashing and vents fixed fast, before a small problem turns into a ceiling stain.</p></div>
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/><path d="m13 11-4 6h6l-4 6"/></svg></div><h3>Hail &amp; storm damage</h3><p>Fast post-storm inspections with dated photos, so you know if it's worth filing a claim.</p></div>
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div><h3>Insurance claim help</h3><p>We document the damage and meet your adjuster on the roof, so nothing gets missed.</p></div>
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 5H5z"/><path d="M12 11v5m0 0-2 3m2-3 2 3"/></svg></div><h3>Gutters</h3><p>Seamless gutters and guards installed to move water away from your roof, siding and foundation.</p></div>
+      <div class="c"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div><h3>Siding &amp; soffit</h3><p>Matching repairs after storms, plus soffit and fascia work to keep critters and moisture out.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="storm" id="storm">
+  <div class="wrap">
+    <img src="house.jpg" alt="Home exterior at dusk" loading="lazy">
+    <div>
+      <div class="kicker">Storm just rolled through?</div>
+      <h2>Don't wait for the leak.</h2>
+      <p>Hail damage often isn't visible from the ground. A free inspection tells you what's really up there before it gets worse.</p>
+      <ul>
+        <li>Photo report of every damaged area</li>
+        <li>Honest call on repair vs. replace</li>
+        <li>Help walking your insurance claim through</li>
+        <li>Temporary tarping if water's getting in</li>
+      </ul>
+      <a class="btn" href="#contact">Schedule a storm inspection →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head"><div class="kicker">How it works</div><h2>Three steps. Zero guesswork.</h2></div>
+    <div class="steps">
+      <div><h3>Free inspection</h3><p>We get on the roof, take photos, and walk you through what we found.</p></div>
+      <div><h3>Straight quote</h3><p>A written estimate with clear options and no high-pressure sales pitch.</p></div>
+      <div><h3>Done right</h3><p>Our crew handles the job, the cleanup, and a final walkthrough with you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rev">
+  <div class="wrap">
+    <div class="head"><div class="kicker" style="color:#ff7a50">Reviews</div><h2>Your 5-star reviews live here.</h2><p>On your real site, this section pulls in your actual Google reviews. Sample spots shown below.</p></div>
+    <div class="rgrid">
+      <div class="r"><div class="st">★★★★★</div>Your customer's review goes here: what they loved about the job, the crew and the cleanup.<b>— Your Google review</b></div>
+      <div class="r"><div class="st">★★★★★</div>Your customer's review goes here: how fast you showed up after the storm.<b>— Your Google review</b></div>
+      <div class="r"><div class="st">★★★★★</div>Your customer's review goes here: how you helped with their insurance claim.<b>— Your Google review</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="info">
+      <div class="kicker">Service area</div>
+      <div class="head" style="margin-bottom:10px"><h2>Proudly local.</h2></div>
+      <p style="color:var(--muted)">Serving the Omaha metro and surrounding towns.</p>
+      <div class="towns"><span>Omaha</span><span>Elkhorn</span><span>Papillion</span><span>La Vista</span><span>Bellevue</span><span>Gretna</span><span>Bennington</span><span>Council Bluffs</span></div>
+      <p><b>Phone:</b> (402) 555-0100</p>
+      <p><b>Hours:</b> Mon–Fri 7am–6pm · Sat 8am–2pm</p>
+      <p><b>Emergency tarping:</b> call anytime</p>
+    </div>
+    <form id="f" novalidate>
+      <h3>Get your free inspection</h3>
+      <label>Name<input name="name" autocomplete="name" required></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+      <label>Address or zip<input name="addr" autocomplete="postal-code"></label>
+      <label>What's going on?<select name="need"><option>Storm / hail damage</option><option>Leak or repair</option><option>Full replacement quote</option><option>Gutters</option><option>Something else</option></select></label>
+      <label>Details (optional)<textarea name="msg"></textarea></label>
+      <button class="btn" type="submit">Request my inspection →</button>
+      <div class="ok" id="ok">Demo only: on your real site, this form sends straight to your email or phone. <a href="../../index.html?home#contact" style="font-weight:700">Want a site like this? →</a></div>
+      <p class="note">Sample site: this form doesn't send anywhere.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© Summit Ridge Roofing (fictional sample business) · Omaha, NE</div>
+    <div>Website &amp; video by <a href="../../index.html?home">FreshFeed</a></div>
+  </div>
+</footer>
+
+<div class="callbar"><a href="#contact">📞 Call now</a><a href="#contact">Free inspection</a></div>
+
+<script>
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').style.display='block';});
+</script>
+</body>
+</html>
