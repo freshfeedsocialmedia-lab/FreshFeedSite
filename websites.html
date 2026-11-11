@@ -265,7 +265,7 @@ const neonLight = new THREE.PointLight(0xE9952A, 2.2, 4, 2); neonLight.position.
 // wall TV on right wall playing the website ad (falls back to the demo screenshot)
 const tvG = new THREE.Group();
 tvG.add(mesh(new RoundedBoxGeometry(.98,1.7,.05,4,.02), std({color:0x0a0a0a, roughness:.3, metalness:.6})));
-const tvPoster = tl.load('samples/roofing/preview-mobile.jpg'); tvPoster.colorSpace = THREE.SRGBColorSpace;
+const tvPoster = tl.load('portfolio/freshfeed-websites-ad-poster.jpg'); tvPoster.colorSpace = THREE.SRGBColorSpace;
 const tvMat = new THREE.MeshBasicMaterial({map:tvPoster, toneMapped:false});
 const tvScr = new THREE.Mesh(new THREE.PlaneGeometry(.9,1.6), tvMat); tvScr.position.z = .027; tvG.add(tvScr);
 tvG.position.set(3.57,2.3,.2); tvG.rotation.y = -Math.PI/2; scene.add(tvG);
